@@ -13,34 +13,34 @@ class FetchPokemon extends Component {
   componentDidMount() {
     this.getIDs()
   }
-  getIDs = () => {
-    const arr = [];
-    for (let i = 1; i <= 10; i++) { // based on difficulty the values for i can change.
-      arr.push(i);
-    };
-    // Credit for shuffle array function: https://github.com/Daplie/knuth-shuffle
-    function shuffle(array) {
-      var currentIndex = array.length, temporaryValue, randomIndex;
-      while (0 !== currentIndex) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-      }
-      return array;
+  // Credit for shuffle array function: https://github.com/Daplie/knuth-shuffle
+  shuffleArray = (array) => {
+    let currentIndex = array.length, temporaryValue, randomIndex;
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
     }
-    const array = shuffle(arr).slice(0, 6);
-    console.log(array);
+    return array;
+  }
+  getIDs = () => {
+    const array = [];
+    for (let i = 1; i <= 721; i++) {
+      array.push(i);
+    };
+    const ids = this.shuffleArray(array).slice(0, 6);
+    const idsToAdd = ids.concat(ids);
     this.setState({
-      id: [...array]
+      id: [...idsToAdd]
     });
   }
   fetchPokemon = () => {
     // If user clicks on button again, will fetch 6 new pokemon
-    if (this.state.id.length === 6) {
-      this.getIDs();
-    }
+    if (this.state.id.length > 0) {
+        this.getIDs();
+      };
     this.setState({
       data: []
     });
@@ -52,7 +52,7 @@ class FetchPokemon extends Component {
             data: [...this.state.data, data]
           });
         });
-    })
+      });
   }
   render() {
     return (
