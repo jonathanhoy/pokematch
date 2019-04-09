@@ -5,15 +5,33 @@ class FetchPokemon extends Component {
   constructor() {
     super();
     this.state = {
-      ids: [150, 435, 275, 638, 523, 421],
+      id: [],
       data: []
     }
   }
+  componentDidMount() {
+    this.getIDs()
+  }
+  getIDs = () => {
+    const arr = [];
+    for (let i = 1; i <= 6; i++) {
+      // Randomly get pokemon IDs up to gen 6. Gen 7 pokemon not guaranteed to have sprites in API.
+      let id = Math.floor(Math.random() * 721) + 1;
+      arr.push(id);
+    };
+    this.setState({
+      id: [...arr]
+    });
+  }
   fetchPokemon = () => {
+    // If user clicks on button again, will fetch 6 new pokemon
+    if (this.state.id.length === 6) {
+      this.getIDs();
+    }
     this.setState({
       data: []
     });
-    this.state.ids.forEach((pokemon) => {
+    this.state.id.forEach((pokemon) => {
       fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
         .then(response => response.json())
         .then(data => {

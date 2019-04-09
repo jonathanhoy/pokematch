@@ -8,7 +8,7 @@ class RenderPokemon extends Component {
         <ul>
           {data.map((pokemon) => {
             return (
-              <li>
+              <li key={pokemon.id}>
                 <p>{pokemon.name}</p>
                 <img src={pokemon.sprites.front_default} alt=""/>
               </li>
