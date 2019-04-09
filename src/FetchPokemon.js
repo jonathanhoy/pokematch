@@ -6,7 +6,8 @@ class FetchPokemon extends Component {
     super();
     this.state = {
       id: [],
-      data: []
+      data: [],
+      difficulty: 'easy' // create form to select difficulty
     }
   }
   componentDidMount() {
@@ -14,13 +15,25 @@ class FetchPokemon extends Component {
   }
   getIDs = () => {
     const arr = [];
-    for (let i = 1; i <= 6; i++) {
-      // Randomly get pokemon IDs up to gen 6. Gen 7 pokemon not guaranteed to have sprites in API.
-      let id = Math.floor(Math.random() * 721) + 1;
-      arr.push(id);
+    for (let i = 1; i <= 10; i++) { // based on difficulty the values for i can change.
+      arr.push(i);
     };
+    // Credit for shuffle array function: https://github.com/Daplie/knuth-shuffle
+    function shuffle(array) {
+      var currentIndex = array.length, temporaryValue, randomIndex;
+      while (0 !== currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+      return array;
+    }
+    const array = shuffle(arr).slice(0, 6);
+    console.log(array);
     this.setState({
-      id: [...arr]
+      id: [...array]
     });
   }
   fetchPokemon = () => {
