@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './components/styles/app.scss';
 import FetchPokemon from './components/FetchPokemon';
 // import RenderPokemon from './RenderPokemon';
 

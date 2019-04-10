@@ -10,7 +10,8 @@
 - make call to API ✅
 - return pokemon info ✅
 - randomize returned pokemon ✅
-- duplicate returned array before rendering
+- duplicate returned array before rendering ✅
+- pokemon get rendered onto cards
 
 ## Stretch Goals
 - Let user select pokedex to narrow selections (value of i in for-loop changes)

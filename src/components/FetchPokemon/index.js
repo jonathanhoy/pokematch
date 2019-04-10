@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RenderPokemon from './RenderPokemon';
+import RenderPokemon from '../RenderPokemon';
 
 class FetchPokemon extends Component {
   constructor() {

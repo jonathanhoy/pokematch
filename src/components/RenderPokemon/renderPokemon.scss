@@ -1,0 +1,42 @@
+.card {
+  &__list {
+    list-style: none;
+    padding: 0;
+  }
+  &__item {
+    width: 100px;
+    height: 100px;
+    position: relative;
+	  perspective: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__front, &__back {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    backface-visibility: hidden;
+    transition: transform 0.5s;
+    box-shadow: 0 5px 10px #888888;
+    border: 5px solid black;
+    border-radius: 50%;
+  }
+  &__front {
+    background-color: #A9A9A9;
+    &--flip {
+      transform: rotateY(-180deg);
+    }
+  }
+  &__back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotateY(180deg);
+    &--flip {
+      transform: rotateY(0deg);
+    }
+  }
+}
