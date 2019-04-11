@@ -13,6 +13,10 @@
 - duplicate returned array before rendering ✅
 - pokemon get rendered onto cards
 
+## Bugs
+- render order not matching console.log
+- array of IDs in FetchPokemon not matching array of data in FetchPokemon
+
 ## Stretch Goals
 - Let user select pokedex to narrow selections (value of i in for-loop changes)
 - Leaderboards for each dex (not difficulties)
