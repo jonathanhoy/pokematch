@@ -1,62 +1,52 @@
 // RenderPokemon
 
 import React, { Component } from 'react';
+import MatchLogic from '../MatchLogic';
+import Axios from 'axios';
 
 class RenderPokemon extends Component {
   constructor() {
     super();
     this.state = {
-      flipped: false
+      pair: [],
+      ids: [],
+      data: {}
     }
   }
-  flipCard = (e) => {
-    if (!e.target.classList.contains('card__front--flip')) {
-      e.target.classList.add('card__front--flip');
-      e.target.nextElementSibling.classList.add('card__back--flip');
+  componentDidUpdate(prevProps) {
+    if (prevProps.dataToRender !== this.props.dataToRender && this.props.dataToRender.length === 12) {
+      const arr = []
+      this.props.dataToRender.forEach((pokemon) => {
+        arr.push(pokemon[0])
+      })
+      console.log(arr);
+      
     }
   }
-  // Credit for shuffle array function: https://github.com/Daplie/knuth-shuffle
-  shuffleArray = (array) => {
-    let currentIndex = array.length, temporaryValue, randomIndex;
-    while (0 !== currentIndex) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-    return array;
-  }
+
+  // flipCard = (e) => {
+  //   if (!e.target.classList.contains('card__front--flip')) {
+  //     e.target.classList.add('card__front--flip');
+  //     e.target.nextElementSibling.classList.add('card__back--flip');
+  //   };
+  //   const pokemon = e.target.id;
+  //   console.log(pokemon);
+  // }
+
   render() {
-    const data = this.shuffleArray(this.props.data);
-    const names = data.map((pokemon) => {
-      return pokemon.name;
-    });
-    if (names.length === 12) {
-      console.log(names);
-    }
     return (
-      <div className="card">
-        <ul className="card__list">
-          {data.map((pokemon, index) => {              
-            return (
-              <li key={index} className="card__item">
-                <div className="card__container">
-                  <div
-                    className="card__front"
-                    onClick={this.flipCard}
-                    id={pokemon.name}
-                  >
-                  </div>
-                  <div className="card__back">
-                    <img src={pokemon.sprites.front_default} title={pokemon.name} alt={`A sprite of ${pokemon.name}.`} className="card__image"/>
-                  </div>
-                </div>
-              </li>
-            )
-          })}
-        </ul>
-      </div>
+      Object.entries(this.props.dataToRender).map((pokemon) => {
+        const name = pokemon[1][0];
+        const sprite = pokemon[1][1];
+        const id = pokemon[1][2];
+        return (
+          <div>
+            <p>{name}</p>
+            <p>{id}</p>
+            <img src={sprite} alt=""/>
+          </div>
+        )
+      })
     )
   }
 }

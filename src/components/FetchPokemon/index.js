@@ -1,5 +1,3 @@
-// FetchPokemon
-
 import React, { Component } from 'react';
 import RenderPokemon from '../RenderPokemon';
 
@@ -7,46 +5,42 @@ class FetchPokemon extends Component {
   constructor() {
     super();
     this.state = {
-      id: [],
       data: [],
-      difficulty: 'easy' // create form to select difficulty
+      dataToRender: []
     }
   }
-  componentDidMount() {
-    this.getIDs();
-  }
-  getIDs = () => {
-    const array = [];
-    for (let i = 1; i <= 6; i++) {
-      array.push(i);
-    };
-    const ids = array.slice(0, 6);
-    const idsToAdd = ids.concat(ids);
-    this.setState({
-      id: [...idsToAdd]
-    });
-  }
-  fetchPokemon = () => {
-    this.setState({
-      data: []
-    });
-    this.state.id.map((pokemon) => {
-      fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
-        .then(response => response.json())
-        .then(data => {
-          this.setState({
-            data: [...this.state.data, data]
-          });
-        });
-      });
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps !== this.props) {
+      const ids = this.props.ids;
+      ids.map((pokeid) => {
+        fetch(`https://pokeapi.co/api/v2/pokemon/${pokeid}`)
+          .then(res => res.json())
+          .then(res => {
+            const name = res.name;
+            const sprite = res.sprites.front_default;
+            const id = res.id;
+            const pokemon = [name, sprite, id];
+            this.setState(prevState => ({
+              data: [...prevState.data, pokemon]
+            }))
+          })
+      })
+    }
+    if (prevState.data !== this.state.data) {
+      const shuffle = this.props.shuffleArray;
+      const data = this.state.data;
+      const arr = shuffle(data.concat(data));
+      this.setState({
+        dataToRender: arr
+      })
+    }
   }
   render() {
     return (
-      <div className="FetchPokemon">
-        <button onClick={this.fetchPokemon}>click me</button>
-        <RenderPokemon data={this.state.data} />
+      <div>
+        <RenderPokemon dataToRender={this.state.dataToRender} />
       </div>
-    );
+    )
   }
 }
 

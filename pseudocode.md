@@ -12,10 +12,12 @@
 - randomize returned pokemon ✅
 - duplicate returned array before rendering ✅
 - pokemon get rendered onto cards
+- separate functions render of pokemon onto cards and getting new pokemon to play again 
+- write matching logic - attach onClick to <img>, push pokemon name to state and compare two names
+
 
 ## Bugs
-- render order not matching console.log
-- array of IDs in FetchPokemon not matching array of data in FetchPokemon
+- 
 
 ## Stretch Goals
 - Let user select pokedex to narrow selections (value of i in for-loop changes)

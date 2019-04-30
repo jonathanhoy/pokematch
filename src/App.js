@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './components/styles/app.scss';
-import FetchPokemon from './components/FetchPokemon';
+import GetPokemonIds from './components/GetPokemonIds';
 // import RenderPokemon from './RenderPokemon';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <FetchPokemon />
+        <GetPokemonIds />
       </div>
     );
   }
