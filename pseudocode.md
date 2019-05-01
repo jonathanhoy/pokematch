@@ -11,7 +11,7 @@
 - return pokemon info ✅
 - randomize returned pokemon ✅
 - duplicate returned array before rendering ✅
-- pokemon get rendered onto cards
+- pokemon get rendered onto cards ✅
 - separate functions render of pokemon onto cards and getting new pokemon to play again 
 - write matching logic - attach onClick to <img>, push pokemon name to state and compare two names
 

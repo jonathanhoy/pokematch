@@ -9,8 +9,13 @@ class FetchPokemon extends Component {
       dataToRender: []
     }
   }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
+      // reset array to clear old data
+      this.setState({
+        data: []
+      });
       const ids = this.props.ids;
       ids.map((pokeid) => {
         fetch(`https://pokeapi.co/api/v2/pokemon/${pokeid}`)
@@ -25,16 +30,17 @@ class FetchPokemon extends Component {
             }))
           })
       })
-    }
+    };
     if (prevState.data !== this.state.data) {
       const shuffle = this.props.shuffleArray;
       const data = this.state.data;
       const arr = shuffle(data.concat(data));
       this.setState({
         dataToRender: arr
-      })
-    }
+      });
+    };
   }
+
   render() {
     return (
       <div>

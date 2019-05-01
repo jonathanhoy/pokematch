@@ -14,6 +14,7 @@ class GetPokemonIds extends Component {
       difficulty: 'easy' // create form to select difficulty
     }
   }
+
   // Credit for shuffle array function: https://github.com/Daplie/knuth-shuffle
   shuffleArray = (array) => {
     let currentIndex = array.length, temporaryValue, randomIndex;
@@ -26,9 +27,10 @@ class GetPokemonIds extends Component {
     }
     return array;
   }
+
   getIDs = () => {
     const array = [];
-    for (let i = 1; i <= 20; i++) {
+    for (let i = 1; i <= 721; i++) {
       array.push(i);
     };
     const ids = this.shuffleArray(array).slice(0, 6);
@@ -36,6 +38,7 @@ class GetPokemonIds extends Component {
       ids: [...ids]
     });
   }
+  
   render() {
     return (
       <div className="FetchPokemon">
