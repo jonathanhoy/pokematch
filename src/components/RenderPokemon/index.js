@@ -8,7 +8,7 @@ class RenderPokemon extends Component {
   constructor() {
     super();
     this.state = {
-      pair: [],
+      pair: [123, 'test'],
       ids: [],
       data: {}
     }
@@ -17,7 +17,7 @@ class RenderPokemon extends Component {
     if (prevProps.dataToRender !== this.props.dataToRender && this.props.dataToRender.length === 12) {
       const arr = []
       this.props.dataToRender.forEach((pokemon) => {
-        arr.push(pokemon[0])
+        arr.push(pokemon.name)
       })
       console.log(arr);
       
@@ -25,10 +25,17 @@ class RenderPokemon extends Component {
   }
 
   flipCard = (e) => {
+    const pokemon = e.target.id;
     if (!e.target.classList.contains('card__front--flip')) {
       e.target.classList.add('card__front--flip');
       e.target.nextElementSibling.classList.add('card__back--flip');
     };
+    const { pair } = this.state;
+    if (pair.length < 2) {
+      const arr = [];
+      // arr.push
+    }
+     
   }
 
   render() {
@@ -37,28 +44,25 @@ class RenderPokemon extends Component {
         <ul className="card__list">
           {this.props.dataToRender.length === 12 && // 12 is currently hard-coded but will be passed as a prop depending on difficulty.
             Object.entries(this.props.dataToRender).map((pokemon, index) => {
-            const name = pokemon[1][0];
-            const sprite = pokemon[1][1];
-            const id = pokemon[1][2];
-            return (
-              <li key={index} className="card__item">
-                <div className="card__container">
-                  <div
-                    className="card__front"
-                    onClick={this.flipCard}
-                    id={name}
-                  >
+              const { name, sprite, id, flipped } = pokemon[1];
+              return (
+                <li key={index} className="card__item">
+                  <div className="card__container">
+                    <div
+                      className="card__front"
+                      onClick={this.flipCard}
+                      id={name}
+                    >
+                    </div>
+                    <div className="card__back">
+                      <img src={sprite} alt={`A sprite of ${name}.`} className="card__sprite-image" />
+                    </div>
                   </div>
-                  <div
-                    className="card__back"
-                  >
-                    <img src={sprite} title={name} alt={`A sprite of ${name}.`} className="card__image" />
-                  </div>
-                </div>
-              </li>
-            )
+                </li>
+              )
           })}
         </ul>
+        <MatchLogic />
       </section>
     )
   }

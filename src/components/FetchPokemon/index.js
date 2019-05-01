@@ -24,7 +24,7 @@ class FetchPokemon extends Component {
             const name = res.name;
             const sprite = res.sprites.front_default;
             const id = res.id;
-            const pokemon = [name, sprite, id];
+            const pokemon = {name: name, sprite: sprite, id: id, flipped: false};
             this.setState(prevState => ({
               data: [...prevState.data, pokemon]
             }))
