@@ -1,3 +1,5 @@
+// FetchPokemon
+
 import React, { Component } from 'react';
 import RenderPokemon from '../RenderPokemon';
 

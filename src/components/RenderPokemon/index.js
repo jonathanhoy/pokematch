@@ -53,6 +53,7 @@ class RenderPokemon extends Component {
                       onClick={this.flipCard}
                       id={name}
                     >
+                      {/* <img src="/assets/pokeball.png" alt="" className="card__front-image"/> */}
                     </div>
                     <div className="card__back">
                       <img src={sprite} alt={`A sprite of ${name}.`} className="card__sprite-image" />

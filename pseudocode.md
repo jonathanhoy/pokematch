@@ -12,9 +12,19 @@
 - randomize returned pokemon ✅
 - duplicate returned array before rendering ✅
 - pokemon get rendered onto cards ✅
-- separate functions render of pokemon onto cards and getting new pokemon to play again 
-- write matching logic - attach onClick to <img>, push pokemon name to state and compare two names
+- using flipped boolean conditionally add to state and flip card
+- 
 
+
+## Form requirements
+- Quickplay (5 pairs, any pokemon)
+- Region-based
+  - Kanto 1-151
+  - Johto 152-251
+  - Hoenn 252-386
+  - Sinnoh 387-493
+  - Unova 494-649
+  - Kalos 650-721
 
 ## Bugs
 - 

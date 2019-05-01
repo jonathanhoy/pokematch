@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import FetchPokemon from '../FetchPokemon';
 import RenderPokemon from '../RenderPokemon';
-import Axios from 'axios';
 
 class GetPokemonIds extends Component {
   constructor() {
@@ -11,7 +10,10 @@ class GetPokemonIds extends Component {
     this.state = {
       ids: [],
       data: [],
-      difficulty: 'easy' // create form to select difficulty
+      difficulty: 'easy', // create form to select difficulty
+      numStart: 4,
+      numEnd: 9,
+      region: 'kanto'
     }
   }
 
@@ -28,9 +30,9 @@ class GetPokemonIds extends Component {
     return array;
   }
 
-  getIDs = () => {
+  getIDs = (start, end) => () => {
     const array = [];
-    for (let i = 1; i <= 721; i++) {
+    for (let i = start; i <= end; i++) {
       array.push(i);
     };
     const ids = this.shuffleArray(array).slice(0, 6);
@@ -38,11 +40,28 @@ class GetPokemonIds extends Component {
       ids: [...ids]
     });
   }
-  
+
+  onChange = (e) => {
+    this.setState({
+      region: e.target.value
+    })
+  }
+
   render() {
     return (
       <div className="FetchPokemon">
-        <button onClick={this.getIDs}>get IDs</button>
+        <button onClick={this.getIDs(1, 721)}>Quickplay</button>
+        <form action="">
+          <select name="region" id="" onChange={this.onChange} value={this.state.region}>
+            <option value="kanto" selected>Kanto</option>
+            <option value="johto">Johto</option>
+            <option value="hoenn">Hoenn</option>
+            <option value="sinnoh">Sinnoh</option>
+            <option value="unova">Unova</option>
+            <option value="kalos">Kalos</option>
+          </select>
+          <button type="submit" onClick={this.getIDs(this.state.numStart, this.state.numEnd)}>Play!</button>
+        </form>
         <FetchPokemon ids={this.state.ids} shuffleArray={this.shuffleArray} />
       </div>
     );

@@ -27,7 +27,7 @@
     border-radius: 50%;
   }
   &__front {
-    background-color: #A9A9A9;
+    // background-color: #A9A9A9;
     &--flip {
       transform: rotateY(-180deg);
     }
@@ -42,6 +42,7 @@
     }
   }
   &__front-image {
-    max-width: 100%;
+    width: 100%;
+    border-radius: 50%;
   }
 }
