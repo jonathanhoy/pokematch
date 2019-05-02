@@ -54,27 +54,116 @@ class GetPokemonIds extends Component {
     })    
   }
 
+  handleClick = (e) => {
+    console.log(e.target.value);
+    this.setState({
+      region: e.target.value
+    }) 
+    
+  }
+
   render() {
     const region = this.state.region;
     const [start, end] = this.state.regions[region];
     return (
-      <div className="FetchPokemon">
-        <button onClick={this.getIDs()}>Quickplay</button>
-        <form action="">
-          <select name="region" id="" onChange={this.onChange} value={this.state.region}>
-            <option value="kanto" selected>Kanto</option>
-            <option value="johto">Johto</option>
-            <option value="hoenn">Hoenn</option>
-            <option value="sinnoh">Sinnoh</option>
-            <option value="unova">Unova</option>
-            <option value="kalos">Kalos</option>
-          </select>
-          <button type="submit" onClick={this.getIDs(start, end)}>Play!</button>
-        </form>
+      <React.Fragment>
+        <section className="getPokemonIds">
+          <div>
+            <button onClick={this.getIDs()}>Quickplay</button>
+          </div>
+          <form action="" className="fetch-form">
+            <div className="fetch-form__radio-group">
+              <input
+                type="radio"
+                name="region"
+                className="fetch-form__input"
+                onClick={this.handleClick}
+                value="kanto"
+                id="kanto"
+                required
+                checked />
+              <label
+                htmlFor="kanto"
+                className="fetch-form__label"
+                tabindex="0">
+                Kanto
+              </label>
+  
+              <input
+                type="radio"
+                name="region"
+                className="fetch-form__input"
+                onClick={this.handleClick}
+                value="johto"
+                id="johto" />
+              <label
+                htmlFor="johto"
+                className="fetch-form__label"
+                tabindex="0">
+                Johto
+              </label>
+  
+              <input
+                type="radio"
+                name="region"
+                className="fetch-form__input"
+                onClick={this.handleClick}
+                value="hoenn"
+                id="hoenn" />
+              <label
+                htmlFor="hoenn"
+                className="fetch-form__label"
+                tabindex="0">
+                Hoenn
+              </label>
+  
+              <input
+                type="radio"
+                name="region"
+                className="fetch-form__input"
+                onClick={this.handleClick}
+                value="sinnoh"
+                id="sinnoh" />
+              <label
+                htmlFor="sinnoh"
+                className="fetch-form__label"
+                tabindex="0">
+                Sinnoh
+              </label>
+  
+              <input
+                type="radio"
+                name="region"
+                className="fetch-form__input"
+                onClick={this.handleClick}
+                value="unova"
+                id="unova" />
+              <label
+                htmlFor="unova"
+                className="fetch-form__label"
+                tabindex="0">
+                Unova
+              </label>
+  
+              <input
+                type="radio"
+                name="region"
+                className="fetch-form__input"
+                onClick={this.handleClick}
+                value="kalos"
+                id="kalos" />
+              <label
+                htmlFor="kalos"
+                className="fetch-form__label"
+                tabindex="0">
+                Kalos
+              </label>
+            </div>
+            <button type="submit" onClick={this.getIDs(start, end)}>Play!</button>
+          </form>
+        </section>
         <FetchPokemon ids={this.state.ids} shuffleArray={this.shuffleArray} />
-
-        <button onClick={this.test}>TEST</button>
-      </div>
+      </React.Fragment>
     );
   }
 }
