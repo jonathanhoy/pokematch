@@ -11,9 +11,15 @@ class GetPokemonIds extends Component {
       ids: [],
       data: [],
       difficulty: 'easy', // create form to select difficulty
-      numStart: 4,
-      numEnd: 9,
-      region: 'kanto'
+      region: 'kanto',
+      regions: {
+        kanto: [1, 151],
+        johto: [152, 251],
+        hoenn: [252, 386],
+        sinnoh: [387, 493],
+        unova: [494, 649],
+        kalos: [650, 721]
+      }
     }
   }
 
@@ -30,7 +36,8 @@ class GetPokemonIds extends Component {
     return array;
   }
 
-  getIDs = (start, end) => () => {
+  getIDs = (start = 1, end = 721) => (e) => {
+    e.preventDefault();
     const array = [];
     for (let i = start; i <= end; i++) {
       array.push(i);
@@ -44,13 +51,15 @@ class GetPokemonIds extends Component {
   onChange = (e) => {
     this.setState({
       region: e.target.value
-    })
+    })    
   }
 
   render() {
+    const region = this.state.region;
+    const [start, end] = this.state.regions[region];
     return (
       <div className="FetchPokemon">
-        <button onClick={this.getIDs(1, 721)}>Quickplay</button>
+        <button onClick={this.getIDs()}>Quickplay</button>
         <form action="">
           <select name="region" id="" onChange={this.onChange} value={this.state.region}>
             <option value="kanto" selected>Kanto</option>
@@ -60,9 +69,11 @@ class GetPokemonIds extends Component {
             <option value="unova">Unova</option>
             <option value="kalos">Kalos</option>
           </select>
-          <button type="submit" onClick={this.getIDs(this.state.numStart, this.state.numEnd)}>Play!</button>
+          <button type="submit" onClick={this.getIDs(start, end)}>Play!</button>
         </form>
         <FetchPokemon ids={this.state.ids} shuffleArray={this.shuffleArray} />
+
+        <button onClick={this.test}>TEST</button>
       </div>
     );
   }

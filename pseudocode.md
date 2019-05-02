@@ -27,7 +27,7 @@
   - Kalos 650-721
 
 ## Bugs
-- 
+- when cards are rendered, changing region re-renders the component. conditional setstate?
 
 ## Stretch Goals
 - Let user select pokedex to narrow selections (value of i in for-loop changes)
