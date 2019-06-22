@@ -12,8 +12,8 @@
 - randomize returned pokemon ✅
 - duplicate returned array before rendering ✅
 - pokemon get rendered onto cards ✅
+- matching logic --> write function to match and that function is fired in componentDidUpdate
 - using flipped boolean conditionally add to state and flip card
-- 
 
 
 ## Form requirements

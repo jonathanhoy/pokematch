@@ -79,13 +79,11 @@ class GetPokemonIds extends Component {
                 className="fetch-form__input"
                 onClick={this.handleClick}
                 value="kanto"
-                id="kanto"
-                required
-                checked />
+                id="kanto" />
               <label
                 htmlFor="kanto"
                 className="fetch-form__label"
-                tabindex="0">
+                tabIndex="0">
                 Kanto
               </label>
   
@@ -99,7 +97,7 @@ class GetPokemonIds extends Component {
               <label
                 htmlFor="johto"
                 className="fetch-form__label"
-                tabindex="0">
+                tabIndex="0">
                 Johto
               </label>
   
@@ -113,7 +111,7 @@ class GetPokemonIds extends Component {
               <label
                 htmlFor="hoenn"
                 className="fetch-form__label"
-                tabindex="0">
+                tabIndex="0">
                 Hoenn
               </label>
   
@@ -127,7 +125,7 @@ class GetPokemonIds extends Component {
               <label
                 htmlFor="sinnoh"
                 className="fetch-form__label"
-                tabindex="0">
+                tabIndex="0">
                 Sinnoh
               </label>
   
@@ -141,7 +139,7 @@ class GetPokemonIds extends Component {
               <label
                 htmlFor="unova"
                 className="fetch-form__label"
-                tabindex="0">
+                tabIndex="0">
                 Unova
               </label>
   
@@ -155,7 +153,7 @@ class GetPokemonIds extends Component {
               <label
                 htmlFor="kalos"
                 className="fetch-form__label"
-                tabindex="0">
+                tabIndex="0">
                 Kalos
               </label>
             </div>

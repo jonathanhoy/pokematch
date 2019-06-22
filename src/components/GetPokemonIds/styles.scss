@@ -1,12 +1,12 @@
 .getPokemonIds {
-  display: flex;
-  justify-content: space-between;
+  // display: flex;
+  // justify-content: space-between;
 }
 
 .fetch-form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  // display: flex;
+  // justify-content: space-between;
+  // align-items: center;
   &__radio-group {
     display: flex;
     justify-content: space-between;
@@ -21,14 +21,14 @@
     display: none;
   }
   &__input:checked+label {
-    border: 3px solid red;
+    border: 3px solid $red;
   }
 }
 
 button {
-  background: red;
+  background: $red;
   color: white;
-  border: 3px solid red;
+  border: 3px solid $red;
   border-radius: 6px;
   padding: 5px 10px;
   font-size: 16px;
