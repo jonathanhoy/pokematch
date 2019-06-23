@@ -1,7 +1,7 @@
 // RenderPokemon
 
 import React, { Component } from 'react';
-import MatchLogic from '../MatchLogic';
+import WinLogic from '../WinLogic';
 
 class RenderPokemon extends Component {
   constructor() {
@@ -13,7 +13,7 @@ class RenderPokemon extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     // updates state with data object
-    if (prevProps.dataToRender !== this.props.dataToRender && this.props.dataToRender.length === 12) {
+    if (prevProps.dataToRender !== this.props.dataToRender && this.props.dataToRender.length === (this.props.difficulty * 2)) {
       this.setState({
         data: this.props.dataToRender
       });
@@ -36,25 +36,21 @@ class RenderPokemon extends Component {
       const [cardOne, cardTwo] = activePair;
       // if pair matches
       if (activePair.length === 2 && cardOne.name === cardTwo.name) {
-        console.log('match');
         activePair.pop();
         activePair.pop();
-        setTimeout(() => {
-          let newStateData = JSON.parse(JSON.stringify(this.state.data));
-          for (let i in this.state.data) {
-            if (newStateData[i].name === cardOne.name) {
-              newStateData[i].matched = true;
-              newStateData[i].flipped = false;
-            };
+        let newStateData = JSON.parse(JSON.stringify(this.state.data));
+        for (let i in this.state.data) {
+          if (newStateData[i].name === cardOne.name) {
+            newStateData[i].matched = true;
+            newStateData[i].flipped = false;
           };
-          this.setState({
-            data: newStateData
-          });
-        }, 700);
+        };
+        this.setState({
+          data: newStateData
+        });
       
       // if pair does not match
       } else if (activePair.length === 2 && cardOne.name !== cardTwo.name) {
-        console.log('not a match');
         setTimeout(() => {
           let newStateData = JSON.parse(JSON.stringify(this.state.data));
           for (let i in this.state.data) {
@@ -63,9 +59,13 @@ class RenderPokemon extends Component {
           this.setState({
             data: newStateData
           });
-        }, 700);
+        }, 600);
       };
       
+      // win logic
+      for (let i in this.state.data) {
+
+      }
     };
   }
 
@@ -100,7 +100,7 @@ class RenderPokemon extends Component {
     return (
       <section className="card">
         <ul className="card__list">
-          {this.props.dataToRender.length === 12 && // 12 is currently hard-coded but will be passed as a prop depending on difficulty.
+          {this.props.dataToRender.length === (this.props.difficulty * 2) && // 
             Object.entries(this.props.dataToRender).map((pokemon, index) => {
               const { name, sprite } = pokemon[1];
               return (
@@ -125,6 +125,7 @@ class RenderPokemon extends Component {
           })}
         </ul>
         {/* <MatchLogic data={this.state.data}/> */}
+        <WinLogic data={this.state.data} />
       </section>
     )
   }

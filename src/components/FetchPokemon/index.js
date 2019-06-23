@@ -48,7 +48,7 @@ class FetchPokemon extends Component {
   render() {
     return (
       <div>
-        <RenderPokemon dataToRender={this.state.dataToRender} />
+        <RenderPokemon dataToRender={this.state.dataToRender} difficulty={this.props.difficulty} />
       </div>
     )
   }

@@ -9,7 +9,7 @@ class GetPokemonIds extends Component {
     this.state = {
       ids: [],
       data: [],
-      difficulty: 'easy', // create form to select difficulty
+      difficulty: 6,
       region: 'kanto',
       regions: {
         kanto: [1, 151],
@@ -41,7 +41,7 @@ class GetPokemonIds extends Component {
     for (let i = start; i <= end; i++) {
       array.push(i);
     };
-    const ids = this.shuffleArray(array).slice(0, 6);
+    const ids = this.shuffleArray(array).slice(0, this.state.difficulty);
     this.setState({
       ids: [...ids]
     });
@@ -54,12 +54,11 @@ class GetPokemonIds extends Component {
   }
 
   handleClick = (e) => {
-    console.log(e.target.value);
     this.setState({
-      region: e.target.value
-    }) 
-    
+      [e.target.name]: e.target.value
+    });
   }
+
 
   render() {
     const region = this.state.region;
@@ -71,6 +70,50 @@ class GetPokemonIds extends Component {
             <button onClick={this.getIDs()}>Quickplay</button>
           </div>
           <form action="" className="fetch-form">
+            <div className="fetch-form__radio-group">
+              <input
+                type="radio"
+                name="difficulty"
+                className="fetch-form__input"
+                onClick={this.handleClick}
+                value="6"
+                id="easy" />
+              <label
+                htmlFor="easy"
+                className="fetch-form__label"
+                tabIndex="0">
+                Easy
+              </label>
+
+              <input
+                type="radio"
+                name="difficulty"
+                className="fetch-form__input"
+                onClick={this.handleClick}
+                value="8"
+                id="medium" />
+              <label
+                htmlFor="medium"
+                className="fetch-form__label"
+                tabIndex="0">
+                Medium
+              </label>
+
+              <input
+                type="radio"
+                name="difficulty"
+                className="fetch-form__input"
+                onClick={this.handleClick}
+                value="10"
+                id="hard" />
+              <label
+                htmlFor="hard"
+                className="fetch-form__label"
+                tabIndex="0">
+                Hard
+              </label>
+            </div>
+
             <div className="fetch-form__radio-group">
               <input
                 type="radio"
@@ -159,7 +202,7 @@ class GetPokemonIds extends Component {
             <button type="submit" onClick={this.getIDs(start, end)}>Play!</button>
           </form>
         </section>
-        <FetchPokemon ids={this.state.ids} shuffleArray={this.shuffleArray} />
+        <FetchPokemon ids={this.state.ids} shuffleArray={this.shuffleArray} difficulty={this.state.difficulty}/>
       </React.Fragment>
     );
   }
