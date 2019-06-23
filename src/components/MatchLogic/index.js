@@ -1,5 +1,3 @@
-// MatchLogic
-
 import React, { Component } from 'react';
 
 class MatchLogic extends Component {

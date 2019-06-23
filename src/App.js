@@ -6,10 +6,9 @@ import GetPokemonIds from './components/GetPokemonIds';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <h1>Gotta Match 'Em All!</h1>
+      <main className="App">
         <GetPokemonIds />
-      </div>
+      </main>
     );
   }
 }

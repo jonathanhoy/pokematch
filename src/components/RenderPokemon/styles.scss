@@ -4,6 +4,7 @@
     padding: 0;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
   }
   &__item {
     width: 100px;
@@ -27,7 +28,6 @@
     border-radius: 50%;
   }
   &__front {
-    // background-color: #A9A9A9;
     &--flip {
       transform: rotateY(-180deg);
     }

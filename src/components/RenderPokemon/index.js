@@ -1,6 +1,5 @@
-// RenderPokemon
-
 import React, { Component } from 'react';
+// import MatchLogic from '../MatchLogic';
 import WinLogic from '../WinLogic';
 
 class RenderPokemon extends Component {
@@ -16,7 +15,8 @@ class RenderPokemon extends Component {
     // updates state with data object
     if (prevProps.dataToRender !== this.props.dataToRender && this.props.dataToRender.length === (this.props.difficulty * 2)) {
       this.setState({
-        data: this.props.dataToRender
+        data: this.props.dataToRender,
+        matches: this.props.matches
       });
       const arr = []
       this.props.dataToRender.forEach((pokemon) => {
@@ -63,12 +63,8 @@ class RenderPokemon extends Component {
           });
         }, 600);
       };
-      
-      // win logic
-      for (let i in this.state.data) {
-
-      }
     };
+
   }
 
   flipCard = (e) => {
@@ -92,15 +88,17 @@ class RenderPokemon extends Component {
   }
 
   flipClassNames(frontBack, index) {
-    let names = [`card__${frontBack}`];
-    if (this.state.data.length > 0 && this.state.data[index].flipped === true) names.push(`card__${frontBack}--flip`);
-    if (this.state.data.length > 0 && this.state.data[index].matched === true) names.push(`card__${frontBack}--flip`);
-    return names.join(' ');
+    if (this.state.data[index]) {
+      let names = [`card__${frontBack}`];
+      if (this.state.data.length > 0 && this.state.data[index].flipped === true) names.push(`card__${frontBack}--flip`);
+      if (this.state.data.length > 0 && this.state.data[index].matched === true) names.push(`card__${frontBack}--flip`);
+      return names.join(' ');
+    }
   }
 
   render() {
     return (
-      <section className="card">
+      <section className="gameboard">
         <ul className="card__list">
           {this.props.dataToRender.length === (this.props.difficulty * 2) && // 
             Object.entries(this.props.dataToRender).map((pokemon, index) => {
@@ -126,7 +124,7 @@ class RenderPokemon extends Component {
               )
           })}
         </ul>
-        {/* <MatchLogic data={this.state.data}/> */}
+        {/* <MatchLogic data={this.state.data} matches={this.state.matches} difficulty={this.props.difficulty} /> */}
         <WinLogic data={this.state.data} matches={this.state.matches} difficulty={this.props.difficulty} />
       </section>
     )

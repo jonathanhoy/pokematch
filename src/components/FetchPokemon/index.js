@@ -1,5 +1,3 @@
-// FetchPokemon
-
 import React, { Component } from 'react';
 import RenderPokemon from '../RenderPokemon';
 
@@ -47,9 +45,9 @@ class FetchPokemon extends Component {
 
   render() {
     return (
-      <div>
-        <RenderPokemon dataToRender={this.state.dataToRender} difficulty={this.props.difficulty} />
-      </div>
+      <React.Fragment>
+        <RenderPokemon dataToRender={this.state.dataToRender} difficulty={this.props.difficulty} matches={this.props.matches} />
+      </React.Fragment>
     )
   }
 }
