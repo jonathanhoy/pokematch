@@ -12,6 +12,7 @@ class RenderPokemon extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    // updates state with data object
     if (prevProps.dataToRender !== this.props.dataToRender && this.props.dataToRender.length === 12) {
       this.setState({
         data: this.props.dataToRender
@@ -23,6 +24,7 @@ class RenderPokemon extends Component {
       console.log(arr);
     };
 
+    // matching logic
     if (prevState.data !== this.state.data) {
       const activePair = [];
       for (let i in this.state.data) {
@@ -32,23 +34,25 @@ class RenderPokemon extends Component {
         };
       };
       const [cardOne, cardTwo] = activePair;
+      // if pair matches
       if (activePair.length === 2 && cardOne.name === cardTwo.name) {
         console.log('match');
         activePair.pop();
         activePair.pop();
-        let newStateData = JSON.parse(JSON.stringify(this.state.data));
-        for (let i in this.state.data) {
-          if (newStateData[i].name === cardOne) {
-            newStateData[i].matched = true;
-            newStateData[i].flipped = false;
+        setTimeout(() => {
+          let newStateData = JSON.parse(JSON.stringify(this.state.data));
+          for (let i in this.state.data) {
+            if (newStateData[i].name === cardOne.name) {
+              newStateData[i].matched = true;
+              newStateData[i].flipped = false;
+            };
           };
-        };
-        this.setState({
-          data: newStateData
-        });
-
-
-
+          this.setState({
+            data: newStateData
+          });
+        }, 700);
+      
+      // if pair does not match
       } else if (activePair.length === 2 && cardOne.name !== cardTwo.name) {
         console.log('not a match');
         setTimeout(() => {
@@ -59,18 +63,9 @@ class RenderPokemon extends Component {
           this.setState({
             data: newStateData
           });
-        }, 750);
+        }, 700);
       };
       
-      
-      // const [ cardOne, cardTwo ] = activePair;
-      // if (cardOne === cardTwo) {
-      //   console.log(this.state.activePair);
-      //   console.log('match'); 
-      // } else {
-      //   console.log(this.state.activePair);
-      //   console.log(('not a match'));
-      // }
     };
   }
 
@@ -92,7 +87,13 @@ class RenderPokemon extends Component {
     this.setState({
       data: newStateData
     });
+  }
 
+  flipClassNames(frontBack, index) {
+    let names = [`card__${frontBack}`];
+    if (this.state.data.length > 0 && this.state.data[index].flipped === true) names.push(`card__${frontBack}--flip`);
+    if (this.state.data.length > 0 && this.state.data[index].matched === true) names.push(`card__${frontBack}--flip`);
+    return names.join(' ');
   }
 
   render() {
@@ -106,14 +107,16 @@ class RenderPokemon extends Component {
                 <li key={index} className="card__item">
                   <div className="card__container">
                     <div
-                      className={this.state.data.length > 0 && this.state.data[index].flipped ? 'card__front card__front--flip' : 'card__front'}
+                      className={this.flipClassNames('front', index)}
                       onClick={this.flipCard}
                       id={name}
                       data-index={index}
                     >
                       {/* <img src="/assets/pokeball.png" alt="" className="card__front-image"/> */}
                     </div>
-                    <div className={this.state.data.length > 0 && this.state.data[index].flipped ? 'card__back card__back--flip' : 'card__back'}>
+                    <div
+                      className={this.flipClassNames('back', index)}
+                    >
                       <img src={sprite} alt={`A sprite of ${name}.`} className="card__sprite-image" />
                     </div>
                   </div>
