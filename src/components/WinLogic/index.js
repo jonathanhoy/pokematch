@@ -7,7 +7,13 @@ class WinLogic extends Component {
   }
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-      
+      if (this.props.difficulty === this.props.matches) {
+        setTimeout(() => {
+          Swal.fire({
+            title: "Congrats bro"
+          });
+        }, 600);
+      }
     };
   }
   render() {

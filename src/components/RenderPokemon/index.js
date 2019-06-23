@@ -7,7 +7,8 @@ class RenderPokemon extends Component {
   constructor() {
     super();
     this.state = {
-      data: {}
+      data: {},
+      matches: 0
     };
   }
 
@@ -46,7 +47,8 @@ class RenderPokemon extends Component {
           };
         };
         this.setState({
-          data: newStateData
+          data: newStateData,
+          matches: this.state.matches + 1
         });
       
       // if pair does not match
@@ -125,7 +127,7 @@ class RenderPokemon extends Component {
           })}
         </ul>
         {/* <MatchLogic data={this.state.data}/> */}
-        <WinLogic data={this.state.data} />
+        <WinLogic data={this.state.data} matches={this.state.matches} difficulty={this.props.difficulty} />
       </section>
     )
   }
