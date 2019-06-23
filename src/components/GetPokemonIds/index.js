@@ -9,6 +9,7 @@ class GetPokemonIds extends Component {
       data: [],
       difficulty: 6,
       matches: 0,
+      attempts: 0,
       region: 'kanto',
       regions: {
         all: [1, 721],
@@ -115,7 +116,12 @@ class GetPokemonIds extends Component {
             </button>
           </form>
         </section>
-        <FetchPokemon ids={this.state.ids} shuffleArray={this.shuffleArray} difficulty={parseInt(this.state.difficulty)} matches={this.state.matches} />
+        <FetchPokemon
+          ids={this.state.ids}
+          shuffleArray={this.shuffleArray}
+          difficulty={parseInt(this.state.difficulty)}
+          matches={this.state.matches}
+          attempts={this.state.attempts} />
       </React.Fragment>
     );
   }

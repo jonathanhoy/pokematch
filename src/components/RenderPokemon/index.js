@@ -7,7 +7,8 @@ class RenderPokemon extends Component {
     super();
     this.state = {
       data: {},
-      matches: 0
+      matches: 0,
+      attempts: 0
     };
   }
 
@@ -16,7 +17,8 @@ class RenderPokemon extends Component {
     if (prevProps.dataToRender !== this.props.dataToRender && this.props.dataToRender.length === (this.props.difficulty * 2)) {
       this.setState({
         data: this.props.dataToRender,
-        matches: this.props.matches
+        matches: this.props.matches,
+        attempts: this.props.attempts
       });
       const arr = []
       this.props.dataToRender.forEach((pokemon) => {
@@ -48,7 +50,8 @@ class RenderPokemon extends Component {
         };
         this.setState({
           data: newStateData,
-          matches: this.state.matches + 1
+          matches: this.state.matches + 1,
+          attempts: this.state.attempts + 1
         });
       
       // if pair does not match
@@ -59,7 +62,8 @@ class RenderPokemon extends Component {
             newStateData[i].flipped = false;
           };
           this.setState({
-            data: newStateData
+            data: newStateData,
+            attempts: this.state.attempts + 1
           });
         }, 600);
       };
@@ -99,6 +103,13 @@ class RenderPokemon extends Component {
   render() {
     return (
       <section className="gameboard">
+        {this.state.data.length > 0 && 
+          (
+            <div className="game-metrics">
+              <p>Attempts: {this.state.attempts}</p>
+            </div>
+          )
+        }
         <ul className="card__list">
           {this.props.dataToRender.length === (this.props.difficulty * 2) && // 
             Object.entries(this.props.dataToRender).map((pokemon, index) => {
@@ -125,7 +136,11 @@ class RenderPokemon extends Component {
           })}
         </ul>
         {/* <MatchLogic data={this.state.data} matches={this.state.matches} difficulty={this.props.difficulty} /> */}
-        <WinLogic data={this.state.data} matches={this.state.matches} difficulty={this.props.difficulty} />
+        <WinLogic
+          data={this.state.data}
+          matches={this.state.matches}
+          difficulty={this.props.difficulty}
+          attempts={this.state.attempts} />
       </section>
     )
   }

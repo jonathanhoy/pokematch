@@ -46,7 +46,11 @@ class FetchPokemon extends Component {
   render() {
     return (
       <React.Fragment>
-        <RenderPokemon dataToRender={this.state.dataToRender} difficulty={this.props.difficulty} matches={this.props.matches} />
+        <RenderPokemon
+          dataToRender={this.state.dataToRender}
+          difficulty={this.props.difficulty}
+          matches={this.props.matches}
+          attempts={this.props.attempts} />
       </React.Fragment>
     )
   }
