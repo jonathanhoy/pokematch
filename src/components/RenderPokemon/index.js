@@ -7,13 +7,11 @@ class RenderPokemon extends Component {
   constructor() {
     super();
     this.state = {
-      activePair: [],
-      ids: [],
       data: {}
     };
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.dataToRender !== this.props.dataToRender && this.props.dataToRender.length === 12) {
       this.setState({
         data: this.props.dataToRender
@@ -24,36 +22,77 @@ class RenderPokemon extends Component {
       })
       console.log(arr);
     };
-  }
 
-  compareCards = (cardOne, cardTwo) => {
-    if (cardOne !== '' && cardOne === cardTwo) {
-      alert('correct!');
+    if (prevState.data !== this.state.data) {
+      const activePair = [];
+      for (let i in this.state.data) {
+        const pokemon = this.state.data[i];
+        if (pokemon.flipped === true) {
+          activePair.push(pokemon);
+        };
+      };
+      const [cardOne, cardTwo] = activePair;
+      if (activePair.length === 2 && cardOne.name === cardTwo.name) {
+        console.log('match');
+        activePair.pop();
+        activePair.pop();
+        let newStateData = JSON.parse(JSON.stringify(this.state.data));
+        for (let i in this.state.data) {
+          if (newStateData[i].name === cardOne) {
+            newStateData[i].matched = true;
+            newStateData[i].flipped = false;
+          };
+        };
+        this.setState({
+          data: newStateData
+        });
+
+
+
+      } else if (activePair.length === 2 && cardOne.name !== cardTwo.name) {
+        console.log('not a match');
+        setTimeout(() => {
+          let newStateData = JSON.parse(JSON.stringify(this.state.data));
+          for (let i in this.state.data) {
+            newStateData[i].flipped = false;
+          };
+          this.setState({
+            data: newStateData
+          });
+        }, 750);
+      };
+      
+      
+      // const [ cardOne, cardTwo ] = activePair;
+      // if (cardOne === cardTwo) {
+      //   console.log(this.state.activePair);
+      //   console.log('match'); 
+      // } else {
+      //   console.log(this.state.activePair);
+      //   console.log(('not a match'));
+      // }
     };
   }
 
   flipCard = (e) => {
-    const pokemon = e.target.id;
+    const activePair = [];
+    for (let i in this.state.data) {
+      const pokemon = this.state.data[i];
+      if (pokemon.flipped === true) {
+        activePair.push(pokemon);
+      };
+    };
+    if (activePair.length === 2) {
+      return null;
+    };
+    // to prevent flipping third card
     const index = e.target.dataset.index;
-    
     let newStateData = JSON.parse(JSON.stringify(this.state.data));
-    newStateData[index].flipped = !newStateData[index].flipped
+    newStateData[index].flipped = !newStateData[index].flipped;
     this.setState({
       data: newStateData
     });
-    
-    
-    
-    // if (!e.target.classList.contains('card__front--flip')) {
-    //   e.target.classList.add('card__front--flip');
-    //   e.target.nextElementSibling.classList.add('card__back--flip');
-    // };
-    const { activePair } = this.state;
-    if (activePair.length < 2) {
-      this.setState({
-        activePair: [...activePair, pokemon]
-      })
-    };
+
   }
 
   render() {
@@ -62,12 +101,11 @@ class RenderPokemon extends Component {
         <ul className="card__list">
           {this.props.dataToRender.length === 12 && // 12 is currently hard-coded but will be passed as a prop depending on difficulty.
             Object.entries(this.props.dataToRender).map((pokemon, index) => {
-              const { name, sprite, id, flipped } = pokemon[1];
+              const { name, sprite } = pokemon[1];
               return (
                 <li key={index} className="card__item">
                   <div className="card__container">
                     <div
-                      // className="card__front"
                       className={this.state.data.length > 0 && this.state.data[index].flipped ? 'card__front card__front--flip' : 'card__front'}
                       onClick={this.flipCard}
                       id={name}
@@ -83,7 +121,7 @@ class RenderPokemon extends Component {
               )
           })}
         </ul>
-        <MatchLogic activePair={this.state.activePair} data={this.state.data}/>
+        {/* <MatchLogic data={this.state.data}/> */}
       </section>
     )
   }

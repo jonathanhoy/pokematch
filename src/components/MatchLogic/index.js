@@ -23,11 +23,15 @@ class MatchLogic extends Component {
   }
 
   compareCards = () => {
-    // if (this.state.cards.length === 2) {
-    //   setTimeout(function () {
-    //     alert("Hello");
-    //   }, 750);
-    // }
+    if (this.state.cards.length === 2) {
+      const [ card1, card2 ] = this.state.cards;
+      if (card1 === card2) {
+        console.log('match');
+      } else {
+        console.log('not a match');
+        
+      }
+    }
   }
 
   render() {

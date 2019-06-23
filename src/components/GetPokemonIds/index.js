@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import FetchPokemon from '../FetchPokemon';
-import RenderPokemon from '../RenderPokemon';
 
 class GetPokemonIds extends Component {
   constructor() {
