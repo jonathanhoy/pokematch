@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FetchPokemon from '../FetchPokemon';
+import Swal from 'sweetalert2';
 
 class GetPokemonIds extends Component {
   constructor() {
@@ -11,6 +12,7 @@ class GetPokemonIds extends Component {
       matches: 0,
       attempts: 0,
       region: 'kanto',
+      victory: false,
       regions: {
         all: [1, 721],
         kanto: [1, 151],
@@ -65,10 +67,10 @@ class GetPokemonIds extends Component {
 
             <div className="fetch-form__difficulty-container">
               <label 
-                htmlFor=""
+                htmlFor="difficulty"
                 className="fetch-form__label"
               >
-                Select difficulty
+                Select difficulty:
               </label>
               <select 
                 name="difficulty"
@@ -88,7 +90,7 @@ class GetPokemonIds extends Component {
                 htmlFor="region"
                 className="fetch-form__label"
               >
-                Select region
+                Select region:
             </label>
               <select
                 name="region"
@@ -121,7 +123,9 @@ class GetPokemonIds extends Component {
           shuffleArray={this.shuffleArray}
           difficulty={parseInt(this.state.difficulty)}
           matches={this.state.matches}
-          attempts={this.state.attempts} />
+          attempts={this.state.attempts}
+          region={this.state.region}
+          victory={this.state.victory} />
       </React.Fragment>
     );
   }

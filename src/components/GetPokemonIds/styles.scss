@@ -1,13 +1,12 @@
-.getPokemonIds {
-  // display: flex;
-  // justify-content: space-between;
-}
-
 .fetch-form {
+  &__difficulty-container, &__region-container {
+    background: white;
+    border-radius: 6px;
+    padding: 15px;
+    margin: 15px 0;
+  }
   &__label {
     display: block;
-    border-bottom: 1px solid black;
-    padding-bottom: 15px;
   }
   &__select {
     appearance: none;

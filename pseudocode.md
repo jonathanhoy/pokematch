@@ -31,7 +31,7 @@
 - when cards are rendered, changing region re-renders the component. conditional setstate?
 
 ## Stretch Goals
-- Let user select pokedex to narrow selections (value of i in for-loop changes)
+<!-- - Let user select pokedex to narrow selections (value of i in for-loop changes) -->
 - Leaderboards for each dex (not difficulties)
   - Difficulties:
     - Easy (gen 1 starters, pikachu, 4 pairs)

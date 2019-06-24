@@ -140,7 +140,9 @@ class RenderPokemon extends Component {
           data={this.state.data}
           matches={this.state.matches}
           difficulty={this.props.difficulty}
-          attempts={this.state.attempts} />
+          attempts={this.state.attempts}
+          region={this.props.region}
+          victory={this.props.victory} />
       </section>
     )
   }
