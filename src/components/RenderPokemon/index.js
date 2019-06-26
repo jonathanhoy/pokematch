@@ -13,6 +13,7 @@ class RenderPokemon extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    // base game
     // updates state with data object
     if (prevProps.dataToRender !== this.props.dataToRender && this.props.dataToRender.length === (this.props.difficulty * 2)) {
       this.setState({
@@ -20,12 +21,28 @@ class RenderPokemon extends Component {
         matches: this.props.matches,
         attempts: this.props.attempts
       });
-      const arr = []
+      const arr = [];
       this.props.dataToRender.forEach((pokemon) => {
-        arr.push(pokemon.name)
-      })
+        arr.push(pokemon.name);
+      });
       console.log(arr);
     };
+
+    // twice custom game
+    if (prevProps.dataToRender !== this.props.dataToRender && this.props.customGame === true) {
+      this.setState({
+        data: this.props.dataToRender,
+        matches: this.props.matches,
+        attempts: this.props.attempts
+      });
+      const arr = [];
+      this.props.dataToRender.forEach((member) => {
+        arr.push(member.name);
+      });
+      console.log(arr);
+    }
+
+
 
     // matching logic
     if (prevState.data !== this.state.data) {
@@ -103,6 +120,7 @@ class RenderPokemon extends Component {
   render() {
     return (
       <section className="gameboard">
+        <h1 className="title">Gotta Match 'Em All!</h1>
         {this.state.data.length > 0 && 
           (
             <div className="game-metrics">
@@ -111,7 +129,7 @@ class RenderPokemon extends Component {
           )
         }
         <ul className="card__list">
-          {this.props.dataToRender.length === (this.props.difficulty * 2) && // 
+          {this.props.dataToRender.length === (this.props.difficulty * 2) && this.props.customGame === false && // 
             Object.entries(this.props.dataToRender).map((pokemon, index) => {
               const { name, sprite } = pokemon[1];
               return (
@@ -134,6 +152,30 @@ class RenderPokemon extends Component {
                 </li>
               )
           })}
+          {this.props.customGame === true &&
+            Object.entries(this.props.dataToRender).map((member, index) => {
+              const { name, sprite } = member[1];
+              return (
+                <li key={index} className="card__item">
+                  <div className="card__container">
+                    <div
+                      className={this.flipClassNames('front', index)}
+                      onClick={this.flipCard}
+                      id={name}
+                      data-index={index}
+                    >
+                      {/* <img src="/assets/pokeball.png" alt="" className="card__front-image"/> */}
+                    </div>
+                    <div
+                      className={this.flipClassNames('back', index)}
+                    >
+                      <img src={sprite} alt={`A sprite of ${name}.`} className="card__sprite-image" />
+                    </div>
+                  </div>
+                </li>
+              ) 
+            })
+          }
         </ul>
         {/* <MatchLogic data={this.state.data} matches={this.state.matches} difficulty={this.props.difficulty} /> */}
         <WinLogic

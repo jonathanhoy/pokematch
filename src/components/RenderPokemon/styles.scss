@@ -40,9 +40,17 @@
     &--flip {
       transform: rotateY(0deg);
     }
+    img {
+      max-width: 100%;
+      border-radius: 50%;
+    }
   }
   &__front-image {
     width: 100%;
     border-radius: 50%;
   }
+}
+
+.title {
+  text-align: center;
 }

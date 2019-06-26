@@ -30,7 +30,6 @@ class Leaderboard extends Component {
             Object.values(this.state.leaderboard)
               .sort((a, b) => (a.score > b.score) ? 1 : -1)
               .map((entry, index) => {
-                console.log(entry);
                 if (entry.score !== 0) {
                   return (
                     <li index={index}>

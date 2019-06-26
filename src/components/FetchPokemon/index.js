@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RenderPokemon from '../RenderPokemon';
+import { twice } from '../helpers/twice';
 
 class FetchPokemon extends Component {
   constructor() {
@@ -11,7 +12,8 @@ class FetchPokemon extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps !== this.props) {
+    // fetch pokemon api for regular games
+    if (prevProps !== this.props && this.props.customGame === false) {
       // reset array to clear old data
       this.setState({
         data: []
@@ -33,6 +35,13 @@ class FetchPokemon extends Component {
         )
       })
     };
+
+    if (prevProps !== this.props && this.props.customGame === true) {
+      this.setState({
+        data: [...twice]
+      });
+    }
+
     if (prevState.data !== this.state.data) {
       const shuffle = this.props.shuffleArray;
       const data = this.state.data;
@@ -52,7 +61,8 @@ class FetchPokemon extends Component {
           matches={this.props.matches}
           attempts={this.props.attempts}
           region={this.props.region}
-          victory={this.props.victory} />
+          victory={this.props.victory}
+          customGame={this.props.customGame} />
       </React.Fragment>
     )
   }

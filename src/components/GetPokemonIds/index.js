@@ -21,7 +21,8 @@ class GetPokemonIds extends Component {
         sinnoh: [387, 493],
         unova: [494, 649],
         kalos: [650, 721]
-      }
+      },
+      customGame: false
     }
   }
 
@@ -50,6 +51,24 @@ class GetPokemonIds extends Component {
     });
   }
 
+
+  // currently hard-coded for TWICE
+  customGetIDs = (e) => {
+    e.preventDefault();
+    this.setState({
+      customGame: true,
+      difficulty: 9
+    });
+    const array = [];
+    for (let i = 1; i <= 9; i++) {
+      array.push(i);
+    };
+    const ids = this.shuffleArray(array);
+    this.setState({
+      ids: [...ids]
+    });
+  }
+
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
@@ -62,7 +81,6 @@ class GetPokemonIds extends Component {
     return (
       <React.Fragment>
         <section className="settings">
-          <h1>Gotta Match 'Em All!</h1>
           <form action="" className="fetch-form">
 
             <div className="fetch-form__difficulty-container">
@@ -91,7 +109,7 @@ class GetPokemonIds extends Component {
                 className="fetch-form__label"
               >
                 Select region:
-            </label>
+              </label>
               <select
                 name="region"
                 id="region"
@@ -117,6 +135,34 @@ class GetPokemonIds extends Component {
               Play!
             </button>
           </form>
+
+          <form action="" className="fetch-form">
+            <div className="fetch-form__region-container">
+              <label
+                htmlFor="region"
+                className="fetch-form__label"
+              >
+                Custom Settings:
+              </label>
+              <select
+                name="difficulty"
+                id="region"
+                required
+                onChange={this.handleChange}
+                className="fetch-form__select"
+              >
+                <option value="9">Teudoongie</option>
+              </select>
+            </div>
+
+            <button
+              type="submit"
+              onClick={this.customGetIDs}
+              className="fetch-form__submit"
+            >
+              Play!
+            </button>
+          </form>
         </section>
         <FetchPokemon
           ids={this.state.ids}
@@ -125,7 +171,8 @@ class GetPokemonIds extends Component {
           matches={this.state.matches}
           attempts={this.state.attempts}
           region={this.state.region}
-          victory={this.state.victory} />
+          victory={this.state.victory}
+          customGame={this.state.customGame} />
       </React.Fragment>
     );
   }
