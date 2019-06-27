@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RenderPokemon from '../RenderPokemon';
-import { twice } from '../helpers/twice';
+import { api } from '../api';
 
 class FetchPokemon extends Component {
   constructor() {
@@ -37,8 +37,10 @@ class FetchPokemon extends Component {
     };
 
     if (prevProps !== this.props && this.props.customGame === true) {
+      const i = this.props.customSetting;
+      const tempArr = api[i].data;
       this.setState({
-        data: [...twice]
+        data: [...tempArr]
       });
     }
 

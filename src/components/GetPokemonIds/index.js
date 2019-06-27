@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import FetchPokemon from '../FetchPokemon';
+import Leaderboard from '../Leaderboard';
 import Swal from 'sweetalert2';
+import { api } from '../api';
 
 class GetPokemonIds extends Component {
   constructor() {
@@ -22,7 +24,9 @@ class GetPokemonIds extends Component {
         unova: [494, 649],
         kalos: [650, 721]
       },
-      customGame: false
+      customGame: false,
+      customSetting: -1,
+      customDifficulty: -1
     }
   }
 
@@ -40,7 +44,10 @@ class GetPokemonIds extends Component {
   }
 
   getIDs = (start = 1, end = 721) => (e) => {
-    e.preventDefault();
+    e.preventDefault();  
+    this.setState({
+      customGame: false,
+    });
     const array = [];
     for (let i = start; i <= end; i++) {
       array.push(i);
@@ -51,16 +58,22 @@ class GetPokemonIds extends Component {
     });
   }
 
-
-  // currently hard-coded for TWICE
   customGetIDs = (e) => {
     e.preventDefault();
+    if (this.state.customSetting === -1) {
+      return Swal.fire({
+        title: "Please select a challenge!",
+        confirmButtonColor: '#ee1515',
+        allowOutsideClick: false
+      });
+    };
     this.setState({
       customGame: true,
-      difficulty: 9
     });
     const array = [];
-    for (let i = 1; i <= 9; i++) {
+    const index = parseInt(this.state.customSetting);
+    const arrLength = api[index].data.length;
+    for (let i = 1; i <= arrLength; i++) {
       array.push(i);
     };
     const ids = this.shuffleArray(array);
@@ -139,22 +152,24 @@ class GetPokemonIds extends Component {
           <form action="" className="fetch-form">
             <div className="fetch-form__region-container">
               <label
-                htmlFor="region"
+                htmlFor="customSetting"
                 className="fetch-form__label"
               >
                 Custom Settings:
               </label>
               <select
-                name="difficulty"
-                id="region"
+                name="customSetting"
+                id="customSetting"
                 required
                 onChange={this.handleChange}
                 className="fetch-form__select"
               >
-                <option value="9">Teudoongie</option>
+                <option value="">???</option>
+                <option value="0" data-customDifficulty="4">Blackpink</option>
+                <option value="1" data-customDifficulty="7">{`${'Bts'.toUpperCase()}`}</option>
+                <option value="2" data-customDifficulty="9">{`${'Twice'.toUpperCase()}`}</option>
               </select>
             </div>
-
             <button
               type="submit"
               onClick={this.customGetIDs}
@@ -163,16 +178,18 @@ class GetPokemonIds extends Component {
               Play!
             </button>
           </form>
+          <Leaderboard />
         </section>
         <FetchPokemon
           ids={this.state.ids}
           shuffleArray={this.shuffleArray}
-          difficulty={parseInt(this.state.difficulty)}
+          difficulty={this.state.customSetting !== -1 ? parseInt(api[this.state.customSetting].difficulty) : parseInt(this.state.difficulty)}
           matches={this.state.matches}
           attempts={this.state.attempts}
           region={this.state.region}
           victory={this.state.victory}
-          customGame={this.state.customGame} />
+          customGame={this.state.customGame}
+          customSetting={this.state.customSetting} />
       </React.Fragment>
     );
   }
