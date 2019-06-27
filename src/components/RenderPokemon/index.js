@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import MatchLogic from '../MatchLogic';
 import WinLogic from '../WinLogic';
 
 class RenderPokemon extends Component {
@@ -164,7 +163,6 @@ class RenderPokemon extends Component {
                       id={name}
                       data-index={index}
                     >
-                      {/* <img src="/assets/pokeball.png" alt="" className="card__front-image"/> */}
                     </div>
                     <div
                       className={this.flipClassNames('back', index)}

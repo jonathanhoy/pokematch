@@ -73,47 +73,47 @@ export const api = [
       {
         "name": "nayeon",
         "id": "1",
-        "sprite": "/assets/twice/nayeon.jpg",
+        "sprite": "/assets/twice/nayeon.png",
       },
       {
         "name": "jeongyeon",
         "id": "2",
-        "sprite": "/assets/twice/jeongyeon.jpg",
+        "sprite": "/assets/twice/jeongyeon.png",
       },
       {
         "name": "momo",
         "id": "3",
-        "sprite": "/assets/twice/momo.jpg",
+        "sprite": "/assets/twice/momo.png",
       },
       {
         "name": "sana",
         "id": "4",
-        "sprite": "/assets/twice/sana.jpg",
+        "sprite": "/assets/twice/sana.png",
       },
       {
         "name": "jihyo",
         "id": "5",
-        "sprite": "/assets/twice/jihyo.jpg",
+        "sprite": "/assets/twice/jihyo.png",
       },
       {
         "name": "mina",
         "id": "6",
-        "sprite": "/assets/twice/mina.jpg",
+        "sprite": "/assets/twice/mina.png",
       },
       {
         "name": "dahyun",
         "id": "7",
-        "sprite": "/assets/twice/dahyun.jpg",
+        "sprite": "/assets/twice/dahyun.png",
       },
       {
         "name": "chaeyoung",
         "id": "8",
-        "sprite": "/assets/twice/chaeyoung.jpg",
+        "sprite": "/assets/twice/chaeyoung.png",
       },
       {
         "name": "tzuyu",
         "id": "9",
-        "sprite": "/assets/twice/tzuyu.jpg",
+        "sprite": "/assets/twice/tzuyu.png",
       }
     ]
   }
