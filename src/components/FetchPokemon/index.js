@@ -35,7 +35,7 @@ class FetchPokemon extends Component {
         )
       })
     };
-
+    
     if (prevProps !== this.props && this.props.customGame === true) {
       const i = this.props.customSetting;
       const tempArr = api[i].data;
@@ -45,9 +45,8 @@ class FetchPokemon extends Component {
     }
 
     if (prevState.data !== this.state.data) {
-      const shuffle = this.props.shuffleArray;
       const data = this.state.data;
-      const arr = shuffle(data.concat(data));
+      const arr = this.props.shuffleArray(data.concat(data));
       this.setState({
         dataToRender: arr
       });
@@ -64,7 +63,10 @@ class FetchPokemon extends Component {
           attempts={this.props.attempts}
           region={this.props.region}
           victory={this.props.victory}
-          customGame={this.props.customGame} />
+          customGame={this.props.customGame}
+          region={this.props.region}
+          customGame={this.props.customGame}
+          customGameContext={this.props.customGameContext} />
       </React.Fragment>
     )
   }

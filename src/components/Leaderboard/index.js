@@ -8,32 +8,42 @@ class Leaderboard extends Component {
       leaderboard: []
     }
   }
-  componentDidMount() {
-    const dbRef = firebase.database().ref();
-    dbRef.on('value', (response) => {      
-      const newState = [];
-      const data = response.val();
-      for (let key in data) {
-        newState.push(data[key]);
-      }
-      this.setState({
-        leaderboard: newState
+
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      const dbRef = firebase.database().ref(`${this.props.customGame === true ? this.props.customGameContext : this.props.region}`);
+      dbRef.on('value', (response) => {      
+        const newState = [];
+        const data = response.val();
+        for (let key in data) {
+          newState.push(data[key]);
+        }
+        this.setState({
+          leaderboard: newState
+        });
       });
-    });
+    }
   }
+
+  capitalize = (s) => {
+    if (typeof s !== 'string') return ''
+    return s.charAt(0).toUpperCase() + s.slice(1)
+  }
+
   render() {
     return (
       <section className="leaderboard">
         <h3 className="leaderboard__heading">Leaderboard</h3>
+        <p className="leaderboard__subheading">{this.capitalize(this.props.customGame === true ? this.props.customGameContext : this.props.region)}</p>
         <ol className="leaderboard__list">
           {
             Object.values(this.state.leaderboard)
               .sort((a, b) => (a.score > b.score) ? 1 : -1)
               .map((entry, index) => {
-                if (entry.score !== 0 && index <= 6) {
+                if (entry.score !== 0 && index < 5) {
                   return (
-                    <li index={index - 1} className="leaderboard__item">
-                      <p>{`${index - 1}. ${entry.name}`}</p>
+                    <li index={index} className="leaderboard__item">
+                      <p>{`${index + 1}. ${entry.name}`}</p>
                       <p>{`${entry.score}`}</p>
                     </li>
                   )

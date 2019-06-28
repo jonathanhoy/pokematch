@@ -23,7 +23,10 @@ class WinLogic extends Component {
         matches: this.props.matches,
         difficulty: this.props.difficulty,
         attempts: this.props.attempts,
-        victory: this.props.victory
+        victory: this.props.victory,
+        region: this.props.region,
+        customGame: this.props.customGame,
+        customGameContext: this.props.customGameContext
       });
     };
     if (prevState !== this.state && this.state.matches !== 0 && this.state.matches === this.state.difficulty && this.state.victory === false) {
@@ -47,7 +50,8 @@ class WinLogic extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const dbRef = firebase.database().ref();
+    const node = this.state.customGame === true ? this.state.customGameContext : this.state.region;
+    const dbRef = firebase.database().ref(`${node}/`);
     const leaderboardEntry = {
       name: this.state.name,
       score: this.state.attempts

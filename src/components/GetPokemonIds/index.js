@@ -26,7 +26,7 @@ class GetPokemonIds extends Component {
       },
       customGame: false,
       customSetting: -1,
-      customDifficulty: -1
+      customGameContext: ''
     }
   }
 
@@ -46,7 +46,7 @@ class GetPokemonIds extends Component {
   getIDs = (start = 1, end = 721) => (e) => {
     e.preventDefault();  
     this.setState({
-      customGame: false,
+      customGame: false
     });
     const array = [];
     for (let i = start; i <= end; i++) {
@@ -67,9 +67,6 @@ class GetPokemonIds extends Component {
         allowOutsideClick: false
       });
     };
-    this.setState({
-      customGame: true,
-    });
     const array = [];
     const index = parseInt(this.state.customSetting);
     const arrLength = api[index].data.length;
@@ -78,7 +75,9 @@ class GetPokemonIds extends Component {
     };
     const ids = this.shuffleArray(array);
     this.setState({
-      ids: [...ids]
+      ids: [...ids],
+      customGame: true,
+      customGameContext: api[index].name
     });
   }
 
@@ -165,9 +164,10 @@ class GetPokemonIds extends Component {
                 className="fetch-form__select"
               >
                 <option value="">???</option>
-                <option value="0" data-customDifficulty="4">Blackpink</option>
-                <option value="1" data-customDifficulty="7">{`${'Bts'.toUpperCase()}`}</option>
-                <option value="2" data-customDifficulty="9">{`${'Twice'.toUpperCase()}`}</option>
+                <option value="0">Blackpink</option>
+                <option value="1">{`${'Bts'.toUpperCase()}`}</option>
+                <option value="2">{`${'Twice'.toUpperCase()}`}</option>
+                <option value="3">Naruto</option>
               </select>
             </div>
             <button
@@ -178,7 +178,10 @@ class GetPokemonIds extends Component {
               Play!
             </button>
           </form>
-          <Leaderboard />
+          <Leaderboard
+            region={this.state.region}
+            customGame={this.state.customGame}
+            customGameContext={this.state.customGameContext} />
         </section>
         <FetchPokemon
           ids={this.state.ids}
@@ -189,7 +192,10 @@ class GetPokemonIds extends Component {
           region={this.state.region}
           victory={this.state.victory}
           customGame={this.state.customGame}
-          customSetting={this.state.customSetting} />
+          customSetting={this.state.customSetting}
+          region={this.state.region}
+          customGame={this.state.customGame}
+          customGameContext={this.state.customGameContext} />
       </React.Fragment>
     );
   }

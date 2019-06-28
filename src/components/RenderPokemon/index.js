@@ -182,7 +182,10 @@ class RenderPokemon extends Component {
           difficulty={this.props.difficulty}
           attempts={this.state.attempts}
           region={this.props.region}
-          victory={this.props.victory} />
+          victory={this.props.victory}
+          region={this.props.region}
+          customGame={this.props.customGame}
+          customGameContext={this.props.customGameContext} />
       </section>
     )
   }
