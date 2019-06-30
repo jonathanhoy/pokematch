@@ -41,8 +41,6 @@ class RenderPokemon extends Component {
       console.log(arr);
     }
 
-
-
     // matching logic
     if (prevState.data !== this.state.data) {
       const activePair = [];

@@ -26,8 +26,12 @@ class Leaderboard extends Component {
   }
 
   capitalize = (s) => {
-    if (typeof s !== 'string') return ''
-    return s.charAt(0).toUpperCase() + s.slice(1)
+    if (typeof s !== 'string') return '';
+    if (this.props.customGame !== true) {
+      return s.charAt(0).toUpperCase() + s.slice(1)
+    } else {
+      return s;
+    }
   }
 
   render() {

@@ -1,6 +1,6 @@
 export const api = [
   {
-    "name": "blackpink",
+    "name": "Blackpink",
     "difficulty": 4,
     "data": [
       {
@@ -26,7 +26,7 @@ export const api = [
     ]
   },
   {
-    "name": "bts",
+    "name": "BTS",
     "difficulty": 7,
     "data": [
       {
@@ -67,7 +67,7 @@ export const api = [
     ]
   },
   {
-    "name": "twice",
+    "name": "TWICE",
     "difficulty": 9,
     "data": [
       {
@@ -118,7 +118,7 @@ export const api = [
     ]
   },
   {
-    "name": "naruto",
+    "name": "Naruto",
     "difficulty": 28,
     "data": [
       {
