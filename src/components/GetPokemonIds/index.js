@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import FetchPokemon from '../FetchPokemon';
 import Leaderboard from '../Leaderboard';
 import Swal from 'sweetalert2';
-import { api } from '../api';
 
 class GetPokemonIds extends Component {
   constructor() {
@@ -23,10 +22,7 @@ class GetPokemonIds extends Component {
         sinnoh: [387, 493],
         unova: [494, 649],
         kalos: [650, 721]
-      },
-      customGame: false,
-      customSetting: -1,
-      customGameContext: ''
+      }
     }
   }
 
@@ -55,29 +51,6 @@ class GetPokemonIds extends Component {
     const ids = this.shuffleArray(array).slice(0, parseInt(this.state.difficulty));
     this.setState({
       ids: [...ids]
-    });
-  }
-
-  customGetIDs = (e) => {
-    e.preventDefault();
-    if (this.state.customSetting === -1) {
-      return Swal.fire({
-        title: "Please select a challenge!",
-        confirmButtonColor: '#ee1515',
-        allowOutsideClick: false
-      });
-    };
-    const array = [];
-    const index = parseInt(this.state.customSetting);
-    const arrLength = api[index].data.length;
-    for (let i = 1; i <= arrLength; i++) {
-      array.push(i);
-    };
-    const ids = this.shuffleArray(array);
-    this.setState({
-      ids: [...ids],
-      customGame: true,
-      customGameContext: api[index].name
     });
   }
 
@@ -147,55 +120,18 @@ class GetPokemonIds extends Component {
               Play!
             </button>
           </form>
-
-          <form action="" className="fetch-form">
-            <div className="fetch-form__region-container">
-              <label
-                htmlFor="customSetting"
-                className="fetch-form__label"
-              >
-                Custom Settings:
-              </label>
-              <select
-                name="customSetting"
-                id="customSetting"
-                required
-                onChange={this.handleChange}
-                className="fetch-form__select"
-              >
-                <option value="">???</option>
-                <option value="0">Blackpink</option>
-                <option value="1">{`${'Bts'.toUpperCase()}`}</option>
-                <option value="2">{`${'Twice'.toUpperCase()}`}</option>
-                <option value="3">Naruto</option>
-              </select>
-            </div>
-            <button
-              type="submit"
-              onClick={this.customGetIDs}
-              className="fetch-form__submit"
-            >
-              Play!
-            </button>
-          </form>
           <Leaderboard
-            region={this.state.region}
-            customGame={this.state.customGame}
-            customGameContext={this.state.customGameContext} />
+            region={this.state.region} />
         </section>
         <FetchPokemon
           ids={this.state.ids}
           shuffleArray={this.shuffleArray}
-          difficulty={this.state.customSetting !== -1 ? parseInt(api[this.state.customSetting].difficulty) : parseInt(this.state.difficulty)}
+          difficulty={parseInt(this.state.difficulty)}
           matches={this.state.matches}
           attempts={this.state.attempts}
           region={this.state.region}
           victory={this.state.victory}
-          customGame={this.state.customGame}
-          customSetting={this.state.customSetting}
-          region={this.state.region}
-          customGame={this.state.customGame}
-          customGameContext={this.state.customGameContext} />
+          region={this.state.region} />
       </React.Fragment>
     );
   }

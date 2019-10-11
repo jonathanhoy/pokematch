@@ -13,7 +13,7 @@ class FetchPokemon extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     // fetch pokemon api for regular games
-    if (prevProps !== this.props && this.props.customGame === false) {
+    if (prevProps !== this.props) {
       // reset array to clear old data
       this.setState({
         data: []
@@ -35,14 +35,6 @@ class FetchPokemon extends Component {
         )
       })
     };
-    
-    if (prevProps !== this.props && this.props.customGame === true) {
-      const i = this.props.customSetting;
-      const tempArr = api[i].data;
-      this.setState({
-        data: [...tempArr]
-      });
-    }
 
     if (prevState.data !== this.state.data) {
       const data = this.state.data;
@@ -63,10 +55,7 @@ class FetchPokemon extends Component {
           attempts={this.props.attempts}
           region={this.props.region}
           victory={this.props.victory}
-          customGame={this.props.customGame}
-          region={this.props.region}
-          customGame={this.props.customGame}
-          customGameContext={this.props.customGameContext} />
+          region={this.props.region} />
       </React.Fragment>
     )
   }
