@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import RenderPokemon from '../RenderPokemon';
-import { api } from '../api';
 
 class FetchPokemon extends Component {
   constructor() {
