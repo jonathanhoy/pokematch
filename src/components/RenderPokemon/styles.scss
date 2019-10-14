@@ -1,10 +1,15 @@
 .card {
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   &__list {
     list-style: none;
     padding: 0;
-    display: flex;
-    flex-wrap: wrap;
+    display: inline-grid;
     justify-content: center;
+    grid-template-columns: repeat(4, 1fr);
   }
   &__item {
     width: 100px;

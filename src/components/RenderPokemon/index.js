@@ -111,31 +111,33 @@ class RenderPokemon extends Component {
             </div>
           )
         }
-        <ul className="card__list">
-          {this.props.dataToRender.length === (this.props.difficulty * 2) && // 
-            Object.entries(this.props.dataToRender).map((pokemon, index) => {
-              const { name, sprite } = pokemon[1];
-              return (
-                <li key={index} className="card__item">
-                  <div className="card__container">
-                    <div
-                      className={this.flipClassNames('front', index)}
-                      onClick={this.flipCard}
-                      id={name}
-                      data-index={index}
-                    >
-                      {/* <img src="/assets/pokeball.png" alt="" className="card__front-image"/> */}
+        <div className="card__container">
+          <ul className="card__list">
+            {this.props.dataToRender.length === (this.props.difficulty * 2) && // 
+              Object.entries(this.props.dataToRender).map((pokemon, index) => {
+                const { name, sprite } = pokemon[1];
+                return (
+                  <li key={index} className="card__item">
+                    <div className="card__container">
+                      <div
+                        className={this.flipClassNames('front', index)}
+                        onClick={this.flipCard}
+                        id={name}
+                        data-index={index}
+                      >
+                        {/* <img src="/assets/pokeball.png" alt="" className="card__front-image"/> */}
+                      </div>
+                      <div
+                        className={this.flipClassNames('back', index)}
+                      >
+                        <img src={sprite} alt={`A sprite of ${name}.`} className="card__sprite-image" />
+                      </div>
                     </div>
-                    <div
-                      className={this.flipClassNames('back', index)}
-                    >
-                      <img src={sprite} alt={`A sprite of ${name}.`} className="card__sprite-image" />
-                    </div>
-                  </div>
-                </li>
-              )
-          })}
-        </ul>
+                  </li>
+                )
+            })}
+          </ul>
+        </div>
         {/* <MatchLogic data={this.state.data} matches={this.state.matches} difficulty={this.props.difficulty} /> */}
         <WinLogic
           data={this.state.data}

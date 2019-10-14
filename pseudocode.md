@@ -15,6 +15,7 @@
 - matching logic --> write function to match and that function is fired in componentDidUpdate. make MatchLogic a HOC? ✅
 - using flipped boolean conditionally add to state and flip card ✅
 - win condition logic ✅
+- move high score form submit into its own component
 
 
 ## Form requirements
