@@ -8,9 +8,28 @@ class SubmitForm extends Component {
     this.state = {
       name: "",
       score: 0,
-      region: ""
+      region: "",
+      database: []
     }
   }
+
+  // the idea is to store a database locally in which future high score submissions would get compared to and somehow reject duplicate entries
+  // componentDidMount() {
+  //   const dbRef = firebase.database().ref();
+  //   dbRef.on('value', (response) => {
+  //     const newState = [];
+  //     const data = response.val();
+  //     for (let key in data) {
+  //       newState.push(data[key]);
+  //     }
+  //     const test = Object.entries(newState[0])
+  //     console.log(test);
+      
+  //     this.setState({
+  //       database: newState
+  //     });
+  //   });
+  // }
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
@@ -32,11 +51,11 @@ class SubmitForm extends Component {
     e.preventDefault();
     const node = this.state.region;
     let difficulty = '';
-    if (this.state.difficulty === 6) {
+    if (this.state.difficulty == 6) {
       difficulty = 'easy';
-    } else if (this.state.difficulty === 8) {
+    } else if (this.state.difficulty == 8) {
       difficulty = 'medium';
-    } else if (this.state.difficulty === 10) {
+    } else if (this.state.difficulty == 10) {
       difficulty = 'hard';
     };
     const dbRef = firebase.database().ref(`${node}/${difficulty}`);
