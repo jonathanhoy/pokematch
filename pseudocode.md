@@ -16,7 +16,8 @@
 - using flipped boolean conditionally add to state and flip card ✅
 - win condition logic ✅
 - move high score form submit into its own component
-
+- refactor high scores to be sorted by difficulty
+- only show high score submit form if high score is eligible
 
 ## Form requirements
 - Quickplay (5 pairs, any pokemon)

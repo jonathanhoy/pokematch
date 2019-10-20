@@ -9,9 +9,26 @@ class Leaderboard extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidMount() {
+    this.setState({
+      difficulty: this.props.difficulty
+    });
+    const dbRef = firebase.database().ref(`${this.props.region}/easy`)
+    dbRef.on('value', (response) => {
+      const newState = [];
+      const data = response.val();
+      for (let key in data) {
+        newState.push(data[key]);
+      }
+      this.setState({
+        leaderboard: newState
+      });
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
-      const dbRef = firebase.database().ref(`${this.props.customGame === true ? this.props.customGameContext : this.props.region}`);
+      const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
       dbRef.on('value', (response) => {      
         const newState = [];
         const data = response.val();
@@ -27,10 +44,20 @@ class Leaderboard extends Component {
 
   capitalize = (s) => {
     if (typeof s !== 'string') return '';
-    if (this.props.customGame !== true) {
-      return s.charAt(0).toUpperCase() + s.slice(1)
-    } else {
-      return s;
+    return s.charAt(0).toUpperCase() + s.slice(1)
+  }
+
+  difficulty = () => {
+    switch(this.props.difficulty) {
+      case 6:
+      case "6":
+        return 'easy';
+      case 8:
+      case "8":
+        return 'medium';
+      case 10:
+      case "10":
+        return 'hard';
     }
   }
 
@@ -38,7 +65,7 @@ class Leaderboard extends Component {
     return (
       <section className="leaderboard">
         <h3 className="leaderboard__heading">Leaderboard</h3>
-        <p className="leaderboard__subheading">{this.capitalize(this.props.customGame === true ? this.props.customGameContext : this.props.region)}</p>
+        <p className="leaderboard__subheading">{this.capitalize(this.props.region)} - {this.capitalize(this.difficulty())}</p>
         <ol className="leaderboard__list">
           {
             Object.values(this.state.leaderboard)

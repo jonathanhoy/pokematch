@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Swal from 'sweetalert2';
 import firebase from '../../firebase';
+import SubmitForm from '../SubmitForm';
 
 class WinLogic extends Component {
   constructor() {
@@ -24,12 +25,13 @@ class WinLogic extends Component {
         difficulty: this.props.difficulty,
         attempts: this.props.attempts,
         victory: this.props.victory,
-        region: this.props.region,
-        customGame: this.props.customGame,
-        customGameContext: this.props.customGameContext
+        region: this.props.region
       });
     };
-    if (prevState !== this.state && this.state.matches !== 0 && this.state.matches === this.state.difficulty && this.state.victory === false) {
+    if (prevState !== this.state &&
+        this.state.matches !== 0 &&
+        this.state.matches === this.state.difficulty &&
+        this.state.victory === false) {
       this.setState({
         victory: true
       })
@@ -42,27 +44,27 @@ class WinLogic extends Component {
     };
   }
 
-  handleChange = (e) => {
-    this.setState({
-      [e.target.id]: e.target.value
-    })
-  }
+  // handleChange = (e) => {
+  //   this.setState({
+  //     [e.target.id]: e.target.value
+  //   })
+  // }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const node = this.state.customGame === true ? this.state.customGameContext : this.state.region;
-    const dbRef = firebase.database().ref(`${node}/`);
-    const leaderboardEntry = {
-      name: this.state.name,
-      score: this.state.attempts
-    };
-    dbRef.push(leaderboardEntry);
-  }
+  // handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const node = this.state.customGame === true ? this.state.customGameContext : this.state.region;
+  //   const dbRef = firebase.database().ref(`${node}/`);
+  //   const leaderboardEntry = {
+  //     name: this.state.name,
+  //     score: this.state.attempts
+  //   };
+  //   dbRef.push(leaderboardEntry);
+  // }
 
   render() {
     return (
-      <div>
-        {this.state.victory === true && (
+      <React.Fragment>
+        {/* {this.state.victory === true && (
           <div>
             <h1>VICTORY!</h1>
             <form action="" onSubmit={this.handleSubmit}>
@@ -71,8 +73,13 @@ class WinLogic extends Component {
               <button>submit</button>
             </form>
           </div>
-        )}
-      </div>
+        )} */}
+        <SubmitForm
+          victory={this.state.victory}
+          attempts={this.state.attempts}
+          region={this.state.region}
+          difficulty={this.state.difficulty} />
+      </React.Fragment>
     )
   }
 }

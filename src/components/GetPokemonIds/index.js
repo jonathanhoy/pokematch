@@ -121,7 +121,8 @@ class GetPokemonIds extends Component {
             </button>
           </form>
           <Leaderboard
-            region={this.state.region} />
+            region={this.state.region}
+            difficulty={this.state.difficulty} />
         </section>
         <FetchPokemon
           ids={this.state.ids}
