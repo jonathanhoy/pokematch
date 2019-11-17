@@ -5,7 +5,7 @@
 - Call is made to API to return pokemon info based on the numbers stored in the array.
   - Return sprite
 
-## Steps
+## To do
 
 - make call to API ✅
 - return pokemon info ✅
@@ -15,9 +15,11 @@
 - matching logic --> write function to match and that function is fired in componentDidUpdate. make MatchLogic a HOC? ✅
 - using flipped boolean conditionally add to state and flip card ✅
 - win condition logic ✅
-- move high score form submit into its own component
+- move high score form submit into its own component ✅
 - refactor high scores to be sorted by difficulty ✅
 - only show high score submit form if high score is eligible
+    - take the #5 score on the leaderboard, submit to firebase and have the submit form listen to that node, only if submitform score is lower than the node should the submit form appear
+- style winlogic component
 
 ## Form requirements
 - Quickplay (5 pairs, any pokemon)

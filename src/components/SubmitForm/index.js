@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import Swal from 'sweetalert2';
 import firebase from '../../firebase';
-import { networkInterfaces } from 'os';
 
 const date = new Date();
 
@@ -13,27 +11,10 @@ class SubmitForm extends Component {
       score: 0,
       region: "",
       database: [],
-      victory: false
+      victory: false,
+      leaderboard: []
     }
   }
-
-  // the idea is to store a database locally in which future high score submissions would get compared to and somehow reject duplicate entries
-  // componentDidMount() {
-  //   const dbRef = firebase.database().ref();
-  //   dbRef.on('value', (response) => {
-  //     const newState = [];
-  //     const data = response.val();
-  //     for (let key in data) {
-  //       newState.push(data[key]);
-  //     }
-  //     const test = Object.entries(newState[0])
-  //     console.log(test);
-      
-  //     this.setState({
-  //       database: newState
-  //     });
-  //   });
-  // }
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
@@ -42,6 +23,17 @@ class SubmitForm extends Component {
         region: this.props.region,
         difficulty: this.props.difficulty,
         victory: this.props.victory
+      });
+      const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
+      dbRef.on('value', (response) => {
+        const newState = [];
+        const data = response.val();
+        for (let key in data) {
+          newState.push(data[key]);
+        }
+        this.setState({
+          leaderboard: newState
+        });
       });
     };
   }

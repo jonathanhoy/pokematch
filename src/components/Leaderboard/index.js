@@ -26,8 +26,9 @@ class Leaderboard extends Component {
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
+
       const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
       dbRef.on('value', (response) => {      
         const newState = [];
@@ -39,6 +40,12 @@ class Leaderboard extends Component {
           leaderboard: newState
         });
       });
+
+      // const thresholdRef = firebase.database().ref(`thresholds/${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
+      // thresholdRef.on('value', (response) => {
+      //   console.log('RESPONSE', response.val());
+        
+      // })
     }
   }
 
@@ -60,32 +67,6 @@ class Leaderboard extends Component {
         return 'hard';
     }
   }
-
-  // render() {
-  //   return (
-  //     <section className="leaderboard">
-  //       <h3 className="leaderboard__heading">Leaderboard</h3>
-  //       <p className="leaderboard__subheading">{this.capitalize(this.props.region)} - {this.capitalize(this.difficulty())}</p>
-  //       <ol className="leaderboard__list">
-  //         {
-  //           Object.values(this.state.leaderboard)
-  //             .sort((a, b) => (a.score > b.score) ? 1 : -1)
-  //             .map((entry, index) => {
-  //               if (entry.score !== 0 && index < 5) {
-  //                 return (
-  //                   <li index={index} className="leaderboard__item">
-  //                     <p>{`${index + 1}. ${entry.name}`}</p>
-  //                     <p>{`${entry.score}`}</p>
-  //                   </li>
-  //                 )
-  //               }
-  //             })
-  //         }
-  //       </ol>
-  //     </section>
-  //   )
-  // }
-
 
   render() {
     return (
