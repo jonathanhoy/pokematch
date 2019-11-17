@@ -12,7 +12,8 @@ class SubmitForm extends Component {
       name: "",
       score: 0,
       region: "",
-      database: []
+      database: [],
+      victory: false
     }
   }
 
@@ -39,7 +40,8 @@ class SubmitForm extends Component {
       this.setState({
         score: this.props.attempts,
         region: this.props.region,
-        difficulty: this.props.difficulty
+        difficulty: this.props.difficulty,
+        victory: this.props.victory
       });
     };
   }
@@ -68,11 +70,14 @@ class SubmitForm extends Component {
       timestamp: date.getTime()
     };
     dbRef.push(leaderboardEntry);
+    this.setState({
+      victory: false
+    });
   }
 
   render() {
     return (
-      this.props.victory === true && (
+      this.state.victory === true && (
         <div>
           <h1>VICTORY!</h1>
           <form action="" onSubmit={this.handleSubmit}>

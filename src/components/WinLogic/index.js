@@ -32,16 +32,16 @@ class WinLogic extends Component {
         this.state.matches !== 0 &&
         this.state.matches === this.state.difficulty &&
         this.state.victory === false) {
-      this.setState({
-        victory: true
-      })
-      Swal.fire({
-        title: "Congratulations!",
-        text: `You did it in ${this.state.attempts} attempts. Nice!`,
-        confirmButtonColor: '#ee1515',
-        allowOutsideClick: false
-      });
-    };
+          this.setState({
+            victory: true
+          });
+          Swal.fire({
+            title: "Congratulations!",
+            text: `You did it in ${this.state.attempts} attempts. Nice!`,
+            confirmButtonColor: '#ee1515',
+            allowOutsideClick: false
+          });
+        };
   }
 
   // handleChange = (e) => {
