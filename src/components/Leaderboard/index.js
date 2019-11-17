@@ -61,6 +61,32 @@ class Leaderboard extends Component {
     }
   }
 
+  // render() {
+  //   return (
+  //     <section className="leaderboard">
+  //       <h3 className="leaderboard__heading">Leaderboard</h3>
+  //       <p className="leaderboard__subheading">{this.capitalize(this.props.region)} - {this.capitalize(this.difficulty())}</p>
+  //       <ol className="leaderboard__list">
+  //         {
+  //           Object.values(this.state.leaderboard)
+  //             .sort((a, b) => (a.score > b.score) ? 1 : -1)
+  //             .map((entry, index) => {
+  //               if (entry.score !== 0 && index < 5) {
+  //                 return (
+  //                   <li index={index} className="leaderboard__item">
+  //                     <p>{`${index + 1}. ${entry.name}`}</p>
+  //                     <p>{`${entry.score}`}</p>
+  //                   </li>
+  //                 )
+  //               }
+  //             })
+  //         }
+  //       </ol>
+  //     </section>
+  //   )
+  // }
+
+
   render() {
     return (
       <section className="leaderboard">
@@ -69,7 +95,7 @@ class Leaderboard extends Component {
         <ol className="leaderboard__list">
           {
             Object.values(this.state.leaderboard)
-              .sort((a, b) => (a.score > b.score) ? 1 : -1)
+              .sort((a, b) => (a.score > b.score && a.timestamp < b.timestamp) ? 1 : -1)
               .map((entry, index) => {
                 if (entry.score !== 0 && index < 5) {
                   return (

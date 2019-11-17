@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Swal from 'sweetalert2';
 import firebase from '../../firebase';
+import { networkInterfaces } from 'os';
+
+const date = new Date();
 
 class SubmitForm extends Component {
   constructor() {
@@ -61,7 +64,8 @@ class SubmitForm extends Component {
     const dbRef = firebase.database().ref(`${node}/${difficulty}`);
     const leaderboardEntry = {
       name: this.state.name,
-      score: this.state.score
+      score: this.state.score,
+      timestamp: date.getTime()
     };
     dbRef.push(leaderboardEntry);
   }
