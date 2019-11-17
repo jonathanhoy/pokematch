@@ -71,21 +71,19 @@ class SubmitForm extends Component {
     };
     dbRef.push(leaderboardEntry);
     this.setState({
-      victory: false
+      victory: false,
+      name: ''
     });
   }
 
   render() {
     return (
       this.state.victory === true && (
-        <div>
-          <h1>VICTORY!</h1>
-          <form action="" onSubmit={this.handleSubmit}>
-            <label htmlFor="">name</label>
-            <input id="name" type="text" value={this.state.name} onChange={this.handleChange} />
-            <button>submit</button>
-          </form>
-        </div>
+        <form action="" onSubmit={this.handleSubmit}>
+          <label htmlFor="">name</label>
+          <input id="name" type="text" value={this.state.name} onChange={this.handleChange} />
+          <button>submit</button>
+        </form>
       )
     )
   }

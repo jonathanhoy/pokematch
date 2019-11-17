@@ -33,13 +33,8 @@ class WinLogic extends Component {
         this.state.matches === this.state.difficulty &&
         this.state.victory === false) {
           this.setState({
-            victory: true
-          });
-          Swal.fire({
-            title: "Congratulations!",
-            text: `You did it in ${this.state.attempts} attempts. Nice!`,
-            confirmButtonColor: '#ee1515',
-            allowOutsideClick: false
+            victory: true,
+            matches: 0
           });
         };
   }
@@ -74,6 +69,14 @@ class WinLogic extends Component {
             </form>
           </div>
         )} */}
+        {
+          this.state.victory === true ? (
+            <React.Fragment>
+              <h1>Victory!</h1>
+              <p>You did it in {this.props.attempts} attempts. Nice!</p>
+            </React.Fragment>
+          ) : null
+        }
         <SubmitForm
           victory={this.state.victory}
           attempts={this.state.attempts}

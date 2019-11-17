@@ -95,7 +95,7 @@ class Leaderboard extends Component {
         <ol className="leaderboard__list">
           {
             Object.values(this.state.leaderboard)
-              .sort((a, b) => (a.score > b.score && a.timestamp < b.timestamp) ? 1 : -1)
+              .sort((a, b) => (a.score > b.score || a.timestamp < b.timestamp) ? 1 : -1)
               .map((entry, index) => {
                 if (entry.score !== 0 && index < 5) {
                   return (
