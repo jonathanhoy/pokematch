@@ -13,12 +13,25 @@ class WinLogic extends Component {
       attempts: 0,
       region: 'kanto',
       name: '',
-      victory: false
+      victory: false,
+      threshold: 0
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
+      const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
+      dbRef.on('value', (response) => {
+        const newState = [];
+        const data = response.val();
+        for (let key in data) {
+          newState.push(data[key]);
+        }
+        const threshold = newState.length >= 5 ? Object.values(newState).sort((a, b) => (a.score > b.score || a.timestamp < b.timestamp) ? 1 : -1)[4].score : null;
+        this.setState({
+          threshold
+        });
+      });
       this.setState({
         data: this.props.data,
         matches: this.props.matches,
@@ -39,36 +52,9 @@ class WinLogic extends Component {
         };
   }
 
-  // handleChange = (e) => {
-  //   this.setState({
-  //     [e.target.id]: e.target.value
-  //   })
-  // }
-
-  // handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const node = this.state.customGame === true ? this.state.customGameContext : this.state.region;
-  //   const dbRef = firebase.database().ref(`${node}/`);
-  //   const leaderboardEntry = {
-  //     name: this.state.name,
-  //     score: this.state.attempts
-  //   };
-  //   dbRef.push(leaderboardEntry);
-  // }
-
   render() {
     return (
       <React.Fragment>
-        {/* {this.state.victory === true && (
-          <div>
-            <h1>VICTORY!</h1>
-            <form action="" onSubmit={this.handleSubmit}>
-              <label htmlFor="">name</label>
-              <input id="name" type="text" value={this.state.name} onChange={this.handleChange}/>
-              <button>submit</button>
-            </form>
-          </div>
-        )} */}
         {
           this.state.victory === true ? (
             <React.Fragment>
@@ -77,11 +63,15 @@ class WinLogic extends Component {
             </React.Fragment>
           ) : null
         }
-        <SubmitForm
-          victory={this.state.victory}
-          attempts={this.state.attempts}
-          region={this.state.region}
-          difficulty={this.state.difficulty} />
+        {
+          (this.state.threshold === null || this.props.attempts <= this.state.threshold) ? (
+            <SubmitForm
+              victory={this.state.victory}
+              attempts={this.state.attempts}
+              region={this.state.region}
+              difficulty={this.state.difficulty} />
+          ) : null
+        }
       </React.Fragment>
     )
   }

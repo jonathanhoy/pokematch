@@ -21,6 +21,10 @@
     - take the #5 score on the leaderboard, submit to firebase and have the submit form listen to that node, only if submitform score is lower than the node should the submit form appear
 - style winlogic component
 
+### CURRENT ISSUE
+- submit form needs to show only when it is less than the score threshold ✅
+- submit form is not un-rendering when submitted
+
 ## Form requirements
 - Quickplay (5 pairs, any pokemon)
 - Region-based
