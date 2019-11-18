@@ -68,26 +68,6 @@ class GetPokemonIds extends Component {
         <section className="settings">
           <form action="" className="fetch-form">
 
-            <div className="fetch-form__difficulty-container">
-              <label 
-                htmlFor="difficulty"
-                className="fetch-form__label"
-              >
-                Select difficulty:
-              </label>
-              <select 
-                name="difficulty"
-                id="difficulty"
-                required
-                onChange={this.handleChange}
-                className="fetch-form__select"
-              >
-                <option value="6">Easy</option>
-                <option value="8">Medium</option>
-                <option value="10">Hard</option>
-              </select>
-            </div>
-
             <div className="fetch-form__region-container">
               <label
                 htmlFor="region"
@@ -109,6 +89,26 @@ class GetPokemonIds extends Component {
                 <option value="unova">Unova</option>
                 <option value="kalos">Kalos</option>
                 <option value="all">All</option>
+              </select>
+            </div>
+
+            <div className="fetch-form__difficulty-container">
+              <label 
+                htmlFor="difficulty"
+                className="fetch-form__label"
+              >
+                Select difficulty:
+              </label>
+              <select 
+                name="difficulty"
+                id="difficulty"
+                required
+                onChange={this.handleChange}
+                className="fetch-form__select"
+              >
+                <option value="6">Easy</option>
+                <option value="8">Medium</option>
+                <option value="10">Hard</option>
               </select>
             </div>
 
