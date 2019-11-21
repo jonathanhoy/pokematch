@@ -49,6 +49,12 @@ class WinLogic extends Component {
             victory: true,
             matches: 0
           });
+          // Swal.fire({
+          //   title: "Congratulations!",
+          //   text: `You did it in ${this.state.attempts} attempts. Nice!`,
+          //   confirmButtonColor: '#ee1515',
+          //   allowOutsideClick: false
+          // });
         };
   }
 

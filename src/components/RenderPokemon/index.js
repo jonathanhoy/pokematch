@@ -104,13 +104,6 @@ class RenderPokemon extends Component {
     return (
       <section className="gameboard">
         <h1 className="title">Gotta Match 'Em All!</h1>
-        {this.state.data.length > 0 && 
-          (
-            <div className="game-metrics">
-              <p>Attempts: {this.state.attempts}</p>
-            </div>
-          )
-        }
         <div className="card__container">
           <ul className="card__list">
             {this.props.dataToRender.length === (this.props.difficulty * 2) && // 
@@ -138,6 +131,13 @@ class RenderPokemon extends Component {
             })}
           </ul>
         </div>
+        {this.state.data.length > 0 &&
+          (
+            <div className="game-metrics">
+              <p>Attempts: {this.state.attempts}</p>
+            </div>
+          )
+        }
         {/* <MatchLogic data={this.state.data} matches={this.state.matches} difficulty={this.props.difficulty} /> */}
         <WinLogic
           data={this.state.data}
