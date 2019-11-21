@@ -18,7 +18,31 @@ class WinLogic extends Component {
     }
   }
 
+  componentDidMount() {
+    this.setState({
+      victory: this.props.victory
+    });
+  }
+
   componentDidUpdate(prevProps, prevState) {
+
+    if (prevState !== this.state &&
+      this.state.matches !== 0 &&
+      this.state.matches === this.state.difficulty &&
+      this.state.victory === false) {
+      this.setState({
+        victory: true,
+        matches: 0
+      });
+      Swal.fire({
+        title: "Congratulations!",
+        text: `You did it in ${this.state.attempts} attempts. Nice! ${this.state.victory}`,
+        confirmButtonColor: '#ee1515',
+        allowOutsideClick: false
+      });
+    };
+
+
     if (prevProps !== this.props) {
       const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
       dbRef.on('value', (response) => {
@@ -37,25 +61,9 @@ class WinLogic extends Component {
         matches: this.props.matches,
         difficulty: this.props.difficulty,
         attempts: this.props.attempts,
-        victory: this.props.victory,
         region: this.props.region
       });
     };
-    if (prevState !== this.state &&
-        this.state.matches !== 0 &&
-        this.state.matches === this.state.difficulty &&
-        this.state.victory === false) {
-          this.setState({
-            victory: true,
-            matches: 0
-          });
-          // Swal.fire({
-          //   title: "Congratulations!",
-          //   text: `You did it in ${this.state.attempts} attempts. Nice!`,
-          //   confirmButtonColor: '#ee1515',
-          //   allowOutsideClick: false
-          // });
-        };
   }
 
   render() {
