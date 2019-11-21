@@ -36,7 +36,7 @@ class WinLogic extends Component {
       });
       Swal.fire({
         title: "Congratulations!",
-        text: `You did it in ${this.state.attempts} attempts. Nice! ${this.state.victory}`,
+        text: `You did it in ${this.state.attempts} attempts. Nice!`,
         confirmButtonColor: '#ee1515',
         allowOutsideClick: false
       });
@@ -69,14 +69,6 @@ class WinLogic extends Component {
   render() {
     return (
       <React.Fragment>
-        {
-          this.state.victory === true ? (
-            <React.Fragment>
-              <h1>Victory!</h1>
-              <p>You did it in {this.props.attempts} attempts. Nice!</p>
-            </React.Fragment>
-          ) : null
-        }
         {
           (this.state.threshold === null || this.props.attempts <= this.state.threshold) ? (
             <SubmitForm

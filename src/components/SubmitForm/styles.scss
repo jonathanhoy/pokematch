@@ -1,0 +1,18 @@
+.submit-form {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  &__form {
+    max-width: 240px;
+  }
+  &__input {
+    @include formfield;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  &__button {
+    @include button;
+  }
+}

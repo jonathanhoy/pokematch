@@ -79,11 +79,14 @@ class SubmitForm extends Component {
   render() {
     return (
       (this.state.victory === true && this.state.score > 0 && this.props.victory === true) ? (
-        <form action="" onSubmit={this.handleSubmit}>
-          <label htmlFor="">name</label>
-          <input id="name" type="text" value={this.state.name} onChange={this.handleChange} />
-          <button>submit</button>
-        </form>
+        <div className="submit-form">
+          <h2 className="submit-form__heading">High score! Get on the leaderboard!</h2>
+          <form className="submit-form__form" action="" onSubmit={this.handleSubmit}>
+            <label htmlFor="">Name</label>
+            <input className="submit-form__input" id="name" type="text" value={this.state.name} onChange={this.handleChange} />
+            <button className="submit-form__button">Confirm</button>
+          </form>
+        </div>
       ) : null
     )
   }

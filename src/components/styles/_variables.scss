@@ -1,1 +1,18 @@
 $red: #ee1515;
+
+@mixin button {
+  background: $red;
+  color: white;
+  border: 3px solid $red;
+  border-radius: 6px;
+  font-size: 16px;
+  padding: 5px 10px;
+  width: 100%;
+}
+
+@mixin formfield {
+  border-radius: 6px;
+  font-size: 16px;
+  padding: 5px 10px;
+  width: 100%;
+}
