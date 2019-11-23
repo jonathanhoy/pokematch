@@ -14,7 +14,8 @@ class WinLogic extends Component {
       region: 'kanto',
       name: '',
       victory: false,
-      threshold: 0
+      threshold: 0,
+      showSubmissionForm: false
     }
   }
 
@@ -24,6 +25,12 @@ class WinLogic extends Component {
     });
   }
 
+  resetVictory = () => {
+    this.setState({
+      victory: false
+    })
+  }
+
   componentDidUpdate(prevProps, prevState) {
 
     if (prevState !== this.state &&
@@ -31,14 +38,16 @@ class WinLogic extends Component {
       this.state.matches === this.state.difficulty &&
       this.state.victory === false) {
       this.setState({
-        victory: true,
-        matches: 0
+        // victory: true,
+        matches: 0,
+        showSubmissionForm: true
       });
       Swal.fire({
         title: "Congratulations!",
         text: `You did it in ${this.state.attempts} attempts. Nice!`,
         confirmButtonColor: '#ee1515',
-        allowOutsideClick: false
+        allowOutsideClick: false,
+        // onClose: this.resetVictory
       });
     };
 
@@ -72,6 +81,8 @@ class WinLogic extends Component {
         {
           (this.state.threshold === null || this.props.attempts <= this.state.threshold) ? (
             <SubmitForm
+              showSubmissionForm={this.state.showSubmissionForm}
+              matches={this.state.matches}
               victory={this.state.victory}
               attempts={this.state.attempts}
               region={this.state.region}
