@@ -20,6 +20,7 @@ class WinLogic extends Component {
   }
 
   componentDidMount() {
+    // CURRENT ISSUE: THIS IS BOUND TO WHEN THE COMPONENT MOUNTED AND DOES NOT UPDATE WHEN THE REGION OR DIFFICULTY IS CHANGED.
     const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
     dbRef.on('value', (response) => {
       this.setState({
