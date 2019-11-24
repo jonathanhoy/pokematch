@@ -8,7 +8,7 @@ class RenderPokemon extends Component {
       data: {},
       matches: 0,
       attempts: 0,
-      // victory: false
+      newGame: 0,
     };
   }
 
@@ -20,56 +20,17 @@ class RenderPokemon extends Component {
         data: this.props.dataToRender,
         matches: this.props.matches,
         attempts: this.props.attempts,
-        // victory: this.props.victory
       });
       const arr = [];
       this.props.dataToRender.forEach((pokemon) => {
         arr.push(pokemon.name);
       });
-      // console.log(arr);
       console.table(arr)
     };
 
     // matching logic
     if (prevState.data !== this.state.data) {
-      const activePair = [];
-      for (let i in this.state.data) {
-        const pokemon = this.state.data[i];
-        if (pokemon.flipped === true) {
-          activePair.push(pokemon);
-        };
-      };
-      const [cardOne, cardTwo] = activePair;
-      // if pair matches
-      if (activePair.length === 2 && cardOne.name === cardTwo.name) {
-        activePair.pop();
-        activePair.pop();
-        let newStateData = JSON.parse(JSON.stringify(this.state.data));
-        for (let i in this.state.data) {
-          if (newStateData[i].name === cardOne.name) {
-            newStateData[i].matched = true;
-            newStateData[i].flipped = false;
-          };
-        };
-        this.setState({
-          data: newStateData,
-          matches: this.state.matches + 1,
-          attempts: this.state.attempts + 1
-        });
-      
-      // if pair does not match
-      } else if (activePair.length === 2 && cardOne.name !== cardTwo.name) {
-        setTimeout(() => {
-          let newStateData = JSON.parse(JSON.stringify(this.state.data));
-          for (let i in this.state.data) {
-            newStateData[i].flipped = false;
-          };
-          this.setState({
-            data: newStateData,
-            attempts: this.state.attempts + 1
-          });
-        }, 600);
-      };
+      this.matchLogic();
     };
 
   }
@@ -89,10 +50,10 @@ class RenderPokemon extends Component {
     const index = e.target.dataset.index;
     let newStateData = JSON.parse(JSON.stringify(this.state.data));
     newStateData[index].flipped = !newStateData[index].flipped;
-    this.setState({
+    this.setState((state, props) => ({
       data: newStateData,
-      // victory: false
-    });
+      newGame: state.newGame + 1
+    }));
   }
 
   flipClassNames(frontBack, index) {
@@ -102,6 +63,47 @@ class RenderPokemon extends Component {
       if (this.state.data.length > 0 && this.state.data[index].matched === true) names.push(`card__${frontBack}--flip`);
       return names.join(' ');
     }
+  }
+
+  matchLogic = () => {
+    const activePair = [];
+    for (let i in this.state.data) {
+      const pokemon = this.state.data[i];
+      if (pokemon.flipped === true) {
+        activePair.push(pokemon);
+      };
+    };
+    const [cardOne, cardTwo] = activePair;
+    // if pair matches
+    if (activePair.length === 2 && cardOne.name === cardTwo.name) {
+      activePair.pop();
+      activePair.pop();
+      let newStateData = JSON.parse(JSON.stringify(this.state.data));
+      for (let i in this.state.data) {
+        if (newStateData[i].name === cardOne.name) {
+          newStateData[i].matched = true;
+          newStateData[i].flipped = false;
+        };
+      };
+      this.setState({
+        data: newStateData,
+        matches: this.state.matches + 1,
+        attempts: this.state.attempts + 1
+      });
+
+      // if pair does not match
+    } else if (activePair.length === 2 && cardOne.name !== cardTwo.name) {
+      setTimeout(() => {
+        let newStateData = JSON.parse(JSON.stringify(this.state.data));
+        for (let i in this.state.data) {
+          newStateData[i].flipped = false;
+        };
+        this.setState({
+          data: newStateData,
+          attempts: this.state.attempts + 1
+        });
+      }, 600);
+    };
   }
 
   render() {
@@ -149,8 +151,7 @@ class RenderPokemon extends Component {
           difficulty={this.props.difficulty}
           attempts={this.state.attempts}
           region={this.props.region}
-          newGame={this.props.newGame}
-          // victory={this.props.victory}
+          newGame={this.state.newGame}
            />
       </section>
     )

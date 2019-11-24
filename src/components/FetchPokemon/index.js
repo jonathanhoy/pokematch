@@ -52,9 +52,6 @@ class FetchPokemon extends Component {
           difficulty={this.props.difficulty}
           matches={this.props.matches}
           attempts={this.props.attempts}
-          region={this.props.region}
-          // victory={this.props.victory}
-          newGame={this.props.newGame}
           region={this.props.region} />
       </React.Fragment>
     )
