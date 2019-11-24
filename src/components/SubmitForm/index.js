@@ -12,8 +12,7 @@ class SubmitForm extends Component {
       region: "",
       database: [],
       victory: false,
-      leaderboard: [],
-      showSubmissionForm: false
+      leaderboard: []
     }
   }
 
@@ -23,7 +22,7 @@ class SubmitForm extends Component {
         score: this.props.attempts,
         region: this.props.region,
         difficulty: this.props.difficulty,
-        showSubmissionForm: this.props.showSubmissionForm
+        victory: this.props.victory
       });
       const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
       dbRef.on('value', (response) => {
@@ -37,11 +36,11 @@ class SubmitForm extends Component {
         });
       });
     };
-    if (prevProps.showSubmissionForm !== this.props.showSubmissionForm) {
-      this.setState({
-        victory: true
-      })
-    }
+    // if (prevProps.newGame !== this.props.newGame) {
+    //   this.setState({
+    //     victory: false,
+    //   })
+    // };
   }
 
   handleChange = (e) => {
@@ -68,19 +67,16 @@ class SubmitForm extends Component {
       timestamp: date.getTime()
     };
     dbRef.push(leaderboardEntry);
-    console.log('1', this.state.victory);
     this.setState({
       victory: false,
       name: '',
       score: 0
     });
-    console.log('2', this.state.victory);
-    
   }
 
   render() {
     return (
-      (this.state.showSubmissionForm === true && this.state.score > 0 && this.props.victory === true) ? (
+      (this.state.victory === true) ? (
         <div className="submit-form">
           <h2 className="submit-form__heading">High score! Get on the leaderboard!</h2>
           <form className="submit-form__form" action="" onSubmit={this.handleSubmit}>

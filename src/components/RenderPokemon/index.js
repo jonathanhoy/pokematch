@@ -8,7 +8,7 @@ class RenderPokemon extends Component {
       data: {},
       matches: 0,
       attempts: 0,
-      victory: false
+      // victory: false
     };
   }
 
@@ -20,7 +20,7 @@ class RenderPokemon extends Component {
         data: this.props.dataToRender,
         matches: this.props.matches,
         attempts: this.props.attempts,
-        victory: this.props.victory
+        // victory: this.props.victory
       });
       const arr = [];
       this.props.dataToRender.forEach((pokemon) => {
@@ -90,7 +90,7 @@ class RenderPokemon extends Component {
     newStateData[index].flipped = !newStateData[index].flipped;
     this.setState({
       data: newStateData,
-      victory: false
+      // victory: false
     });
   }
 
@@ -148,7 +148,9 @@ class RenderPokemon extends Component {
           difficulty={this.props.difficulty}
           attempts={this.state.attempts}
           region={this.props.region}
-          victory={this.state.victory} />
+          newGame={this.props.newGame}
+          // victory={this.props.victory}
+           />
       </section>
     )
   }

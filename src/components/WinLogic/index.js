@@ -14,16 +14,15 @@ class WinLogic extends Component {
       region: 'kanto',
       name: '',
       victory: false,
-      threshold: 0,
-      showSubmissionForm: false
+      threshold: 0
     }
   }
 
-  componentDidMount() {
-    this.setState({
-      victory: this.props.victory
-    });
-  }
+  // componentDidMount() {
+  //   this.setState({
+  //     victory: this.props.victory
+  //   });
+  // }
 
   resetVictory = () => {
     this.setState({
@@ -33,14 +32,36 @@ class WinLogic extends Component {
 
   componentDidUpdate(prevProps, prevState) {
 
-    if (prevState !== this.state &&
-      this.state.matches !== 0 &&
-      this.state.matches === this.state.difficulty &&
-      this.state.victory === false) {
+    if (prevProps.newGame !== this.props.newGame) {
       this.setState({
-        // victory: true,
-        matches: 0,
-        showSubmissionForm: true
+        victory: false,
+      })
+    };
+
+    // if (prevState !== this.state &&
+    //   this.state.matches !== 0 &&
+    //   this.state.matches === this.state.difficulty &&
+    //   this.state.victory === false) {
+    //   this.setState({
+    //     victory: true,
+    //     matches: 0
+    //   });
+    //   Swal.fire({
+    //     title: "Congratulations!",
+    //     text: `You did it in ${this.state.attempts} attempts. Nice!`,
+    //     confirmButtonColor: '#ee1515',
+    //     allowOutsideClick: false,
+    //     // onClose: this.resetVictory
+    //   });
+    // };
+
+
+    if (prevState !== this.state &&
+      this.state.matches > 0 &&
+      this.state.matches === this.state.difficulty) {
+      this.setState({
+        victory: true,
+        matches: 0
       });
       Swal.fire({
         title: "Congratulations!",
@@ -81,9 +102,9 @@ class WinLogic extends Component {
         {
           (this.state.threshold === null || this.props.attempts <= this.state.threshold) ? (
             <SubmitForm
-              showSubmissionForm={this.state.showSubmissionForm}
               matches={this.state.matches}
               victory={this.state.victory}
+              newGame={this.props.newGame}
               attempts={this.state.attempts}
               region={this.state.region}
               difficulty={this.state.difficulty} />
