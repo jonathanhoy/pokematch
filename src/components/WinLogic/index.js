@@ -14,7 +14,8 @@ class WinLogic extends Component {
       region: 'kanto',
       name: '',
       threshold: 0,
-      victory: false
+      victory: false,
+      showSubmissionForm: false
     }
   }
 
@@ -27,7 +28,8 @@ class WinLogic extends Component {
       ) {
         this.setState({
           matches: 0,
-          victory: true
+          victory: true,
+          // showSubmissionForm: true
         });
       };
 
@@ -82,7 +84,8 @@ class WinLogic extends Component {
   victorySwal = () => {
     if (this.state.victory === true) {
       this.setState({
-        victory: false
+        victory: false,
+        showSubmissionForm: true
       });
       Swal.fire({
         title: "Congratulations!",
@@ -91,22 +94,22 @@ class WinLogic extends Component {
         allowOutsideClick: false,
       });
     }
-    console.log('winner!');
   }
 
   render() {
     return (
       <React.Fragment>
-        {/* {
+        {
           this.state.threshold === null || this.props.attempts <= this.state.threshold ? 
             <SubmitForm
               matches={this.state.matches}
               newGame={this.props.newGame}
               attempts={this.state.attempts}
               region={this.state.region}
-              difficulty={this.state.difficulty} />
+              difficulty={this.state.difficulty}
+              showSubmissionForm={this.state.showSubmissionForm} />
            : null
-        } */}
+        }
       </React.Fragment>
     )
   }

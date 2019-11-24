@@ -11,7 +11,8 @@ class SubmitForm extends Component {
       score: 0,
       region: "",
       database: [],
-      leaderboard: []
+      leaderboard: [],
+      // showSubmissionForm: false
     }
   }
 
@@ -21,19 +22,24 @@ class SubmitForm extends Component {
         score: this.props.attempts,
         region: this.props.region,
         difficulty: this.props.difficulty,
+        showSubmissionForm: this.props.showSubmissionForm
       });
-      const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
-      dbRef.on('value', (response) => {
-        const newState = [];
-        const data = response.val();
-        for (let key in data) {
-          newState.push(data[key]);
-        }
-        this.setState({
-          leaderboard: newState
-        });
-      });
+      this.submitHighscore();
     };
+  }
+
+  submitHighscore = () => {
+    const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
+    dbRef.on('value', (response) => {
+      const newState = [];
+      const data = response.val();
+      for (let key in data) {
+        newState.push(data[key]);
+      }
+      this.setState({
+        leaderboard: newState
+      });
+    });
   }
 
   handleChange = (e) => {
@@ -44,10 +50,6 @@ class SubmitForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({
-      name: '',
-      score: 0
-    });
     const node = this.state.region;
     let difficulty = '';
     if (this.state.difficulty == 6) {
@@ -64,22 +66,25 @@ class SubmitForm extends Component {
       timestamp: date.getTime()
     };
     dbRef.push(leaderboardEntry);
+    this.setState({
+      name: '',
+      score: 0,
+      showSubmissionForm: !this.state.showSubmissionForm
+    });
   }
 
   render() {
     return (
-      //  ? (
-      //   <div className="submit-form">
-      //     <h2 className="submit-form__heading">High score! Get on the leaderboard!</h2>
-      //     <form className="submit-form__form" action="" onSubmit={this.handleSubmit}>
-      //       <label htmlFor="">Name</label>
-      //       <input className="submit-form__input" id="name" type="text" value={this.state.name} onChange={this.handleChange} />
-      //       <button className="submit-form__button">Confirm</button>
-      //     </form>
-      //   </div>
-      // ) : null
-
-      null
+      this.state.showSubmissionForm === true ? (
+        <div className="submit-form">
+          <h2 className="submit-form__heading">High score! Get on the leaderboard!</h2>
+          <form className="submit-form__form" action="" onSubmit={this.handleSubmit}>
+            <label htmlFor="">Name</label>
+            <input className="submit-form__input" id="name" type="text" value={this.state.name} onChange={this.handleChange} />
+            <button className="submit-form__button">Confirm</button>
+          </form>
+        </div>
+      ) : null
     )
   }
 }
