@@ -26,7 +26,8 @@ class RenderPokemon extends Component {
       this.props.dataToRender.forEach((pokemon) => {
         arr.push(pokemon.name);
       });
-      console.log(arr);
+      // console.log(arr);
+      console.table(arr)
     };
 
     // matching logic
