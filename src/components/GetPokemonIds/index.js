@@ -49,7 +49,9 @@ class GetPokemonIds extends Component {
     const ids = this.shuffleArray(array).slice(0, parseInt(this.state.difficulty));
     this.setState({
       ids: [...ids],
-      newGame: this.state.newGame + 1
+      newGame: this.state.newGame + 1,
+      // matches: 0,
+      // attempts: 0
     });
   }
 
