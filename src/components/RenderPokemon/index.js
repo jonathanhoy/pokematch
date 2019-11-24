@@ -8,7 +8,7 @@ class RenderPokemon extends Component {
       data: {},
       matches: 0,
       attempts: 0,
-      // victory: false
+      newGame: 0,
     };
   }
 
@@ -20,7 +20,6 @@ class RenderPokemon extends Component {
         data: this.props.dataToRender,
         matches: this.props.matches,
         attempts: this.props.attempts,
-        // victory: this.props.victory
       });
       const arr = [];
       this.props.dataToRender.forEach((pokemon) => {
@@ -51,10 +50,10 @@ class RenderPokemon extends Component {
     const index = e.target.dataset.index;
     let newStateData = JSON.parse(JSON.stringify(this.state.data));
     newStateData[index].flipped = !newStateData[index].flipped;
-    this.setState({
+    this.setState((state, props) => ({
       data: newStateData,
-      // victory: false
-    });
+      newGame: state.newGame + 1
+    }));
   }
 
   flipClassNames(frontBack, index) {
@@ -152,8 +151,7 @@ class RenderPokemon extends Component {
           difficulty={this.props.difficulty}
           attempts={this.state.attempts}
           region={this.props.region}
-          newGame={this.props.newGame}
-          // victory={this.props.victory}
+          newGame={this.state.newGame}
            />
       </section>
     )

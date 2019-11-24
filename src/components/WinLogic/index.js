@@ -37,7 +37,7 @@ class WinLogic extends Component {
       prevProps === this.props
       ) {
         this.victorySwal();
-    };
+      };
 
     if (prevProps !== this.props) {
       this.calculateThreshold();
@@ -49,6 +49,12 @@ class WinLogic extends Component {
         region: this.props.region,
       });
     };
+
+    if (this.props.newGame !== prevProps.newGame) {
+      this.setState({
+        victory: false
+      })
+    }
   }
 
   calculateThreshold = () => {
@@ -83,16 +89,9 @@ class WinLogic extends Component {
         text: `You did it in ${this.state.attempts} attempts.`,
         confirmButtonColor: '#ee1515',
         allowOutsideClick: false,
-        // onClose: this.toggleVictory
       });
     }
     console.log('winner!');
-  }
-
-  toggleVictory = () => {
-    this.setState({
-      victory: !this.state.victory
-    })
   }
 
   render() {

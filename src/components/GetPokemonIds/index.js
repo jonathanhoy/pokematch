@@ -13,8 +13,6 @@ class GetPokemonIds extends Component {
       matches: 0,
       attempts: 0,
       region: 'kanto',
-      // victory: false,
-      newGame: 0,
       regions: {
         all: [1, 721],
         kanto: [1, 151],
@@ -50,8 +48,6 @@ class GetPokemonIds extends Component {
     this.setState({
       ids: [...ids],
       newGame: this.state.newGame + 1,
-      // matches: 0,
-      // attempts: 0
     });
   }
 
@@ -131,9 +127,6 @@ class GetPokemonIds extends Component {
           difficulty={parseInt(this.state.difficulty)}
           matches={this.state.matches}
           attempts={this.state.attempts}
-          region={this.state.region}
-          newGame={this.state.newGame}
-          // victory={this.state.victory}
           region={this.state.region} />
       </React.Fragment>
     );
