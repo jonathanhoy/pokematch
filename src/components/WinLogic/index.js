@@ -21,6 +21,7 @@ class WinLogic extends Component {
 
   componentDidMount() {
     // CURRENT ISSUE: THIS IS BOUND TO WHEN THE COMPONENT MOUNTED AND DOES NOT UPDATE WHEN THE REGION OR DIFFICULTY IS CHANGED.
+    // This will hide the submission form when a new high score entry is posted to firebase
     const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
     dbRef.on('value', (response) => {
       this.setState({
@@ -30,6 +31,15 @@ class WinLogic extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (prevProps !== this.props) {
+      const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
+      dbRef.on('value', (response) => {
+        this.setState({
+          showSubmissionForm: false
+        })
+      })
+    }
+
     if (
       prevProps !== this.props &&
       this.props.difficulty > 0 &&
@@ -95,13 +105,6 @@ class WinLogic extends Component {
       this.setState({
         threshold
       });
-    });
-    this.setState({
-      data: this.props.data,
-      matches: this.props.matches,
-      difficulty: this.props.difficulty,
-      attempts: this.props.attempts,
-      region: this.props.region,
     });
   }
 
