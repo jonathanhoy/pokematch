@@ -85,7 +85,7 @@ class WinLogic extends Component {
     if (this.state.victory === true) {
       this.setState({
         victory: false,
-        showSubmissionForm: true
+        // showSubmissionForm: true
       });
       Swal.fire({
         title: "Congratulations!",
@@ -107,7 +107,8 @@ class WinLogic extends Component {
               attempts={this.state.attempts}
               region={this.state.region}
               difficulty={this.state.difficulty}
-              showSubmissionForm={this.state.showSubmissionForm} />
+              // showSubmissionForm={this.state.showSubmissionForm}
+               />
            : null
         }
       </React.Fragment>

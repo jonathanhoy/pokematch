@@ -22,10 +22,21 @@ class SubmitForm extends Component {
         score: this.props.attempts,
         region: this.props.region,
         difficulty: this.props.difficulty,
-        showSubmissionForm: this.props.showSubmissionForm
+        // showSubmissionForm: false
       });
       this.submitHighscore();
     };
+
+    // if (
+    //   prevProps !== this.props &&
+    //   this.props.difficulty > 0 &&
+    //   this.props.matches > 0 &&
+    //   this.props.matches === this.props.difficulty
+    // ) {
+    //     this.setState({
+    //       showSubmissionForm: true
+    //     })
+    // }
   }
 
   submitHighscore = () => {
@@ -69,13 +80,14 @@ class SubmitForm extends Component {
     this.setState({
       name: '',
       score: 0,
-      showSubmissionForm: !this.state.showSubmissionForm
+      // showSubmissionForm: !this.state.showSubmissionForm
     });
   }
 
   render() {
     return (
-      this.state.showSubmissionForm === true ? (
+      // this.state.showSubmissionForm === true ? (
+        // <div className={`submit-form ${this.state.showSubmissionForm === true ? `display--none` : null}`}>
         <div className="submit-form">
           <h2 className="submit-form__heading">High score! Get on the leaderboard!</h2>
           <form className="submit-form__form" action="" onSubmit={this.handleSubmit}>
@@ -84,7 +96,7 @@ class SubmitForm extends Component {
             <button className="submit-form__button">Confirm</button>
           </form>
         </div>
-      ) : null
+      // ) : null
     )
   }
 }
