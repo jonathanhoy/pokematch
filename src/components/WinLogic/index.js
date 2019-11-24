@@ -19,6 +19,15 @@ class WinLogic extends Component {
     }
   }
 
+  componentDidMount() {
+    const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
+    dbRef.on('value', (response) => {
+      this.setState({
+        showSubmissionForm: false
+      })
+    })
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (
       prevProps !== this.props &&
@@ -39,6 +48,11 @@ class WinLogic extends Component {
       prevProps === this.props
       ) {
         this.victorySwal();
+        if (this.state.threshold === null || this.props.attempts <= this.state.threshold) {
+          this.setState({
+            showSubmissionForm: true
+          })
+        }
       };
 
     if (prevProps !== this.props) {
@@ -58,6 +72,15 @@ class WinLogic extends Component {
       })
     }
   }
+
+  // hideSubmissionForm = () => {
+  //   const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
+  //   dbRef.on('value', (response) => {
+  //     this.setState({
+  //       showSubmissionForm: false
+  //     })
+  //   })
+  // }
 
   calculateThreshold = () => {
     const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
@@ -107,10 +130,11 @@ class WinLogic extends Component {
               attempts={this.state.attempts}
               region={this.state.region}
               difficulty={this.state.difficulty}
-              // showSubmissionForm={this.state.showSubmissionForm}
+              showSubmissionForm={this.state.showSubmissionForm}
                />
            : null
         }
+        {/* {this.hideSubmissionForm} */}
       </React.Fragment>
     )
   }

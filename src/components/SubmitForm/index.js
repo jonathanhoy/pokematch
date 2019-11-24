@@ -86,7 +86,7 @@ class SubmitForm extends Component {
 
   render() {
     return (
-      // this.state.showSubmissionForm === true ? (
+      this.props.showSubmissionForm === true ? (
         // <div className={`submit-form ${this.state.showSubmissionForm === true ? `display--none` : null}`}>
         <div className="submit-form">
           <h2 className="submit-form__heading">High score! Get on the leaderboard!</h2>
@@ -96,7 +96,7 @@ class SubmitForm extends Component {
             <button className="submit-form__button">Confirm</button>
           </form>
         </div>
-      // ) : null
+      ) : null
     )
   }
 }
