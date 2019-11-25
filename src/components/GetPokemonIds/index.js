@@ -10,9 +10,12 @@ class GetPokemonIds extends Component {
       ids: [],
       data: [],
       difficulty: 6,
+      difficultySelect: 6,
       matches: 0,
       attempts: 0,
       region: 'kanto',
+      regionSelect: 'kanto',
+      hideBoard: true,
       regions: {
         all: [1, 721],
         kanto: [1, 151],
@@ -38,8 +41,14 @@ class GetPokemonIds extends Component {
     return array;
   }
 
-  getIDs = (start = 1, end = 721) => (e) => {
-    e.preventDefault();  
+  // Get IDs when form is submittted
+  handleSubmit = (start = 1, end = 721) => (e) => {
+    e.preventDefault();
+    this.setState((state, props) => ({
+      region: state.regionSelect,
+      difficulty: state.difficultySelect,
+      hideBoard: false
+    }));
     const array = [];
     for (let i = start; i <= end; i++) {
       array.push(i);
@@ -53,7 +62,8 @@ class GetPokemonIds extends Component {
 
   handleChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+      hideBoard: true
     });
   }
 
@@ -63,7 +73,10 @@ class GetPokemonIds extends Component {
     return (
       <React.Fragment>
         <section className="settings">
-          <form action="" className="fetch-form">
+          <form
+            action=""
+            className="fetch-form"
+            onSubmit={this.handleSubmit(start, end)}>
 
             <div className="fetch-form__region-container">
               <label
@@ -73,7 +86,7 @@ class GetPokemonIds extends Component {
                 Select region:
               </label>
               <select
-                name="region"
+                name="regionSelect"
                 id="region"
                 required
                 onChange={this.handleChange}
@@ -97,7 +110,7 @@ class GetPokemonIds extends Component {
                 Select difficulty:
               </label>
               <select 
-                name="difficulty"
+                name="difficultySelect"
                 id="difficulty"
                 required
                 onChange={this.handleChange}
@@ -111,7 +124,6 @@ class GetPokemonIds extends Component {
 
             <button
               type="submit"
-              onClick={this.getIDs(start, end)}
               className="fetch-form__submit"
             >
               Play!
@@ -127,6 +139,7 @@ class GetPokemonIds extends Component {
           difficulty={parseInt(this.state.difficulty)}
           matches={this.state.matches}
           attempts={this.state.attempts}
+          hideBoard={this.state.hideBoard}
           region={this.state.region} />
       </React.Fragment>
     );

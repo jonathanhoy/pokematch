@@ -11,8 +11,7 @@ class FetchPokemon extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // fetch pokemon api for regular games
-    if (prevProps !== this.props) {
+    if (prevProps !== this.props && prevProps.difficulty === this.props.difficulty && prevProps.region === this.props.region) {
       // reset array to clear old data
       this.setState({
         data: []
@@ -52,6 +51,7 @@ class FetchPokemon extends Component {
           difficulty={this.props.difficulty}
           matches={this.props.matches}
           attempts={this.props.attempts}
+          hideBoard={this.props.hideBoard}
           region={this.props.region} />
       </React.Fragment>
     )
