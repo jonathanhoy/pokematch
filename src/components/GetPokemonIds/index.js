@@ -41,7 +41,6 @@ class GetPokemonIds extends Component {
   // Get IDs when form is submittted
   handleSubmit = (start = 1, end = 721) => (e) => {
     e.preventDefault();
-    console.log('submitting form');
     const array = [];
     for (let i = start; i <= end; i++) {
       array.push(i);

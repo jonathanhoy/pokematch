@@ -28,7 +28,6 @@ class Leaderboard extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-
       const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
       dbRef.on('value', (response) => {      
         const newState = [];
@@ -40,12 +39,6 @@ class Leaderboard extends Component {
           leaderboard: newState
         });
       });
-
-      // const thresholdRef = firebase.database().ref(`thresholds/${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
-      // thresholdRef.on('value', (response) => {
-      //   console.log('RESPONSE', response.val());
-        
-      // })
     }
   }
 
@@ -65,6 +58,8 @@ class Leaderboard extends Component {
       case 10:
       case "10":
         return 'hard';
+      default:
+        break;
     }
   }
 
@@ -80,11 +75,13 @@ class Leaderboard extends Component {
               .map((entry, index) => {
                 if (entry.score !== 0 && index < 5) {
                   return (
-                    <li index={index} className="leaderboard__item">
+                    <li key={index} className="leaderboard__item">
                       <p>{`${index + 1}. ${entry.name}`}</p>
                       <p>{`${entry.score}`}</p>
                     </li>
                   )
+                } else {
+                  return null
                 }
               })
           }
