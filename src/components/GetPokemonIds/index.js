@@ -10,11 +10,11 @@ class GetPokemonIds extends Component {
       ids: [],
       data: [],
       difficulty: 6,
-      difficultySelect: 6,
+      // difficultySelect: 6,
       matches: 0,
       attempts: 0,
       region: 'kanto',
-      regionSelect: 'kanto',
+      // regionSelect: 'kanto',
       hideBoard: true,
       regions: {
         all: [1, 721],
@@ -51,8 +51,8 @@ class GetPokemonIds extends Component {
     };
     const ids = this.shuffleArray(array).slice(0, parseInt(this.state.difficulty));
     this.setState({
-      region: this.state.regionSelect,
-      difficulty: this.state.difficultySelect,
+      // region: this.state.regionSelect,
+      // difficulty: this.state.difficultySelect,
       ids: [...ids],
       hideBoard: false
     });
@@ -74,7 +74,7 @@ class GetPokemonIds extends Component {
           <form
             action=""
             className="fetch-form"
-            onSubmit={this.handleSubmit(start, end)}>
+            >
 
             <div className="fetch-form__region-container">
               <label
@@ -84,8 +84,8 @@ class GetPokemonIds extends Component {
                 Select region:
               </label>
               <select
-                name="regionSelect"
-                // name="region"
+                // name="regionSelect"
+                name="region"
                 id="region"
                 required
                 onChange={this.handleChange}
@@ -109,8 +109,8 @@ class GetPokemonIds extends Component {
                 Select difficulty:
               </label>
               <select 
-                name="difficultySelect"
-                // name="difficulty"
+                // name="difficultySelect"
+                name="difficulty"
                 id="difficulty"
                 required
                 onChange={this.handleChange}
@@ -125,6 +125,7 @@ class GetPokemonIds extends Component {
             <button
               type="submit"
               className="fetch-form__submit"
+              onClick={this.handleSubmit(start, end)}
             >
               Play!
             </button>
