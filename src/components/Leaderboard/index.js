@@ -28,7 +28,7 @@ class Leaderboard extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-      const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
+      const dbRef = firebase.database().ref(`${this.props.region}/${this.difficulty()}`);
       dbRef.on('value', (response) => {      
         const newState = [];
         const data = response.val();
