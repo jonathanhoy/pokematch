@@ -44,11 +44,7 @@ class GetPokemonIds extends Component {
   // Get IDs when form is submittted
   handleSubmit = (start = 1, end = 721) => (e) => {
     e.preventDefault();
-    this.setState((state, props) => ({
-      region: state.regionSelect,
-      difficulty: state.difficultySelect,
-      hideBoard: false
-    }));
+    console.log('submitting form');
     const array = [];
     for (let i = start; i <= end; i++) {
       array.push(i);
@@ -56,7 +52,7 @@ class GetPokemonIds extends Component {
     const ids = this.shuffleArray(array).slice(0, parseInt(this.state.difficulty));
     this.setState({
       ids: [...ids],
-      newGame: this.state.newGame + 1,
+      hideBoard: false
     });
   }
 
@@ -86,7 +82,8 @@ class GetPokemonIds extends Component {
                 Select region:
               </label>
               <select
-                name="regionSelect"
+                // name="regionSelect"
+                name="region"
                 id="region"
                 required
                 onChange={this.handleChange}
@@ -110,7 +107,8 @@ class GetPokemonIds extends Component {
                 Select difficulty:
               </label>
               <select 
-                name="difficultySelect"
+                // name="difficultySelect"
+                name="difficulty"
                 id="difficulty"
                 required
                 onChange={this.handleChange}

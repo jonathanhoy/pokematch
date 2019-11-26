@@ -6,16 +6,26 @@ class FetchPokemon extends Component {
     super();
     this.state = {
       data: [],
-      dataToRender: []
+      dataToRender: [],
+      ids: []
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps !== this.props && prevProps.difficulty === this.props.difficulty && prevProps.region === this.props.region) {
-      // reset array to clear old data
+    if (prevState.data !== this.state.data) {
+      const data = this.state.data;
+      const arr = this.props.shuffleArray(data.concat(data));
       this.setState({
-        data: []
+        dataToRender: arr
       });
+    };
+
+    if (prevProps !== this.props) {
+      // reset array to clear old data
+      this.setState((state, props) => ({
+        data: [],
+        // ids: [...props.ids]
+      }));
       const ids = this.props.ids;
       ids.map((pokeid) => {
         return (
@@ -32,14 +42,6 @@ class FetchPokemon extends Component {
             })
         )
       })
-    };
-
-    if (prevState.data !== this.state.data) {
-      const data = this.state.data;
-      const arr = this.props.shuffleArray(data.concat(data));
-      this.setState({
-        dataToRender: arr
-      });
     };
   }
 

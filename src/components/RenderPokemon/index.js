@@ -111,7 +111,7 @@ class RenderPokemon extends Component {
       <section className="gameboard">
         <h1 className="title">Gotta Match 'Em All!</h1>
         <div className="card__container">
-          <ul className={`card__list ${this.props.hideBoard === true && `opacity--none`}`}>
+          <ul className={`card__list ${this.props.hideBoard === true ? `opacity--none` : ''}`}>
             {this.props.dataToRender.length === (this.props.difficulty * 2) && // 
               Object.entries(this.props.dataToRender).map((pokemon, index) => {
                 const { name, sprite } = pokemon[1];
