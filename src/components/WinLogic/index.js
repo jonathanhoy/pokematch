@@ -20,7 +20,6 @@ class WinLogic extends Component {
   }
 
   componentDidMount() {
-    // CURRENT ISSUE: THIS IS BOUND TO WHEN THE COMPONENT MOUNTED AND DOES NOT UPDATE WHEN THE REGION OR DIFFICULTY IS CHANGED.
     // This will hide the submission form when a new high score entry is posted to firebase
     const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
     dbRef.on('value', (response) => {
@@ -49,7 +48,6 @@ class WinLogic extends Component {
         this.setState({
           matches: 0,
           victory: true,
-          // showSubmissionForm: true
         });
       };
 
@@ -84,15 +82,6 @@ class WinLogic extends Component {
     }
   }
 
-  // hideSubmissionForm = () => {
-  //   const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
-  //   dbRef.on('value', (response) => {
-  //     this.setState({
-  //       showSubmissionForm: false
-  //     })
-  //   })
-  // }
-
   calculateThreshold = () => {
     const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
     dbRef.on('value', (response) => {
@@ -112,7 +101,6 @@ class WinLogic extends Component {
     if (this.state.victory === true) {
       this.setState({
         victory: false,
-        // showSubmissionForm: true
       });
       Swal.fire({
         title: "Congratulations!",
@@ -138,7 +126,6 @@ class WinLogic extends Component {
                />
            : null
         }
-        {/* {this.hideSubmissionForm} */}
       </React.Fragment>
     )
   }

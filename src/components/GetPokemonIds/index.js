@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FetchPokemon from '../FetchPokemon';
 import Leaderboard from '../Leaderboard';
-import Swal from 'sweetalert2';
 
 class GetPokemonIds extends Component {
   constructor() {
@@ -10,11 +9,9 @@ class GetPokemonIds extends Component {
       ids: [],
       data: [],
       difficulty: 6,
-      // difficultySelect: 6,
       matches: 0,
       attempts: 0,
       region: 'kanto',
-      // regionSelect: 'kanto',
       hideBoard: true,
       regions: {
         all: [1, 721],
@@ -51,8 +48,6 @@ class GetPokemonIds extends Component {
     };
     const ids = this.shuffleArray(array).slice(0, parseInt(this.state.difficulty));
     this.setState({
-      // region: this.state.regionSelect,
-      // difficulty: this.state.difficultySelect,
       ids: [...ids],
       hideBoard: false
     });
@@ -84,7 +79,6 @@ class GetPokemonIds extends Component {
                 Select region:
               </label>
               <select
-                // name="regionSelect"
                 name="region"
                 id="region"
                 required
@@ -108,8 +102,7 @@ class GetPokemonIds extends Component {
               >
                 Select difficulty:
               </label>
-              <select 
-                // name="difficultySelect"
+              <select
                 name="difficulty"
                 id="difficulty"
                 required

@@ -153,7 +153,6 @@ class RenderPokemon extends Component {
             </div>
           )
         }
-        {/* <MatchLogic data={this.state.data} matches={this.state.matches} difficulty={this.props.difficulty} /> */}
         <WinLogic
           data={this.state.data}
           matches={this.state.matches}
