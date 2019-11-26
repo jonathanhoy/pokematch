@@ -22,10 +22,9 @@ class FetchPokemon extends Component {
 
     if (prevProps !== this.props) {
       // reset array to clear old data
-      this.setState((state, props) => ({
+      this.setState({
         data: [],
-        // ids: [...props.ids]
-      }));
+      });
       const ids = this.props.ids;
       ids.map((pokeid) => {
         return (

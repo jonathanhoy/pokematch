@@ -12,6 +12,12 @@ class RenderPokemon extends Component {
     };
   }
 
+  componentDidMount() {
+    this.setState({
+      data: this.props.dataToRender
+    })
+  }
+
   componentDidUpdate(prevProps, prevState) {
     // base game
     // updates state with data object
@@ -106,12 +112,16 @@ class RenderPokemon extends Component {
     };
   }
 
+  conditionalHide = () => {
+    return this.props.hideBoard === true ? `opacity--none` : ''
+  }
+
   render() {
     return (
       <section className="gameboard">
         <h1 className="title">Gotta Match 'Em All!</h1>
         <div className="card__container">
-          <ul className={`card__list ${this.props.hideBoard === true ? `opacity--none` : ''}`}>
+          <ul className={`card__list ${this.conditionalHide()}`}>
             {this.props.dataToRender.length === (this.props.difficulty * 2) && // 
               Object.entries(this.props.dataToRender).map((pokemon, index) => {
                 const { name, sprite } = pokemon[1];
@@ -138,7 +148,7 @@ class RenderPokemon extends Component {
         </div>
         {this.state.data.length > 0 &&
           (
-            <div className="game-metrics">
+            <div className={`game-metrics ${this.conditionalHide()}`}>
               <p>Attempts: {this.state.attempts}</p>
             </div>
           )

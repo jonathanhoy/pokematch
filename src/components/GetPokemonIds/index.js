@@ -51,6 +51,8 @@ class GetPokemonIds extends Component {
     };
     const ids = this.shuffleArray(array).slice(0, parseInt(this.state.difficulty));
     this.setState({
+      region: this.state.regionSelect,
+      difficulty: this.state.difficultySelect,
       ids: [...ids],
       hideBoard: false
     });
@@ -82,8 +84,8 @@ class GetPokemonIds extends Component {
                 Select region:
               </label>
               <select
-                // name="regionSelect"
-                name="region"
+                name="regionSelect"
+                // name="region"
                 id="region"
                 required
                 onChange={this.handleChange}
@@ -107,8 +109,8 @@ class GetPokemonIds extends Component {
                 Select difficulty:
               </label>
               <select 
-                // name="difficultySelect"
-                name="difficulty"
+                name="difficultySelect"
+                // name="difficulty"
                 id="difficulty"
                 required
                 onChange={this.handleChange}
