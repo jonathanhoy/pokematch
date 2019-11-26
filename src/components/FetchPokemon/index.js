@@ -6,16 +6,24 @@ class FetchPokemon extends Component {
     super();
     this.state = {
       data: [],
-      dataToRender: []
+      dataToRender: [],
+      ids: []
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // fetch pokemon api for regular games
+    if (prevState.data !== this.state.data) {
+      const data = this.state.data;
+      const arr = this.props.shuffleArray(data.concat(data));
+      this.setState({
+        dataToRender: arr
+      });
+    };
+
     if (prevProps !== this.props) {
       // reset array to clear old data
       this.setState({
-        data: []
+        data: [],
       });
       const ids = this.props.ids;
       ids.map((pokeid) => {
@@ -34,14 +42,6 @@ class FetchPokemon extends Component {
         )
       })
     };
-
-    if (prevState.data !== this.state.data) {
-      const data = this.state.data;
-      const arr = this.props.shuffleArray(data.concat(data));
-      this.setState({
-        dataToRender: arr
-      });
-    };
   }
 
   render() {
@@ -52,6 +52,7 @@ class FetchPokemon extends Component {
           difficulty={this.props.difficulty}
           matches={this.props.matches}
           attempts={this.props.attempts}
+          hideBoard={this.props.hideBoard}
           region={this.props.region} />
       </React.Fragment>
     )

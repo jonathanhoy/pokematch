@@ -10,9 +10,12 @@ class GetPokemonIds extends Component {
       ids: [],
       data: [],
       difficulty: 6,
+      // difficultySelect: 6,
       matches: 0,
       attempts: 0,
       region: 'kanto',
+      // regionSelect: 'kanto',
+      hideBoard: true,
       regions: {
         all: [1, 721],
         kanto: [1, 151],
@@ -38,22 +41,27 @@ class GetPokemonIds extends Component {
     return array;
   }
 
-  getIDs = (start = 1, end = 721) => (e) => {
-    e.preventDefault();  
+  // Get IDs when form is submittted
+  handleSubmit = (start = 1, end = 721) => (e) => {
+    e.preventDefault();
+    console.log('submitting form');
     const array = [];
     for (let i = start; i <= end; i++) {
       array.push(i);
     };
     const ids = this.shuffleArray(array).slice(0, parseInt(this.state.difficulty));
     this.setState({
+      // region: this.state.regionSelect,
+      // difficulty: this.state.difficultySelect,
       ids: [...ids],
-      newGame: this.state.newGame + 1,
+      hideBoard: false
     });
   }
 
   handleChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+      hideBoard: true
     });
   }
 
@@ -63,7 +71,10 @@ class GetPokemonIds extends Component {
     return (
       <React.Fragment>
         <section className="settings">
-          <form action="" className="fetch-form">
+          <form
+            action=""
+            className="fetch-form"
+            >
 
             <div className="fetch-form__region-container">
               <label
@@ -73,6 +84,7 @@ class GetPokemonIds extends Component {
                 Select region:
               </label>
               <select
+                // name="regionSelect"
                 name="region"
                 id="region"
                 required
@@ -97,6 +109,7 @@ class GetPokemonIds extends Component {
                 Select difficulty:
               </label>
               <select 
+                // name="difficultySelect"
                 name="difficulty"
                 id="difficulty"
                 required
@@ -111,8 +124,8 @@ class GetPokemonIds extends Component {
 
             <button
               type="submit"
-              onClick={this.getIDs(start, end)}
               className="fetch-form__submit"
+              onClick={this.handleSubmit(start, end)}
             >
               Play!
             </button>
@@ -127,6 +140,7 @@ class GetPokemonIds extends Component {
           difficulty={parseInt(this.state.difficulty)}
           matches={this.state.matches}
           attempts={this.state.attempts}
+          hideBoard={this.state.hideBoard}
           region={this.state.region} />
       </React.Fragment>
     );

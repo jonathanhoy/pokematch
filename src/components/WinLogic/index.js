@@ -19,7 +19,27 @@ class WinLogic extends Component {
     }
   }
 
+  componentDidMount() {
+    // CURRENT ISSUE: THIS IS BOUND TO WHEN THE COMPONENT MOUNTED AND DOES NOT UPDATE WHEN THE REGION OR DIFFICULTY IS CHANGED.
+    // This will hide the submission form when a new high score entry is posted to firebase
+    const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
+    dbRef.on('value', (response) => {
+      this.setState({
+        showSubmissionForm: false
+      })
+    })
+  }
+
   componentDidUpdate(prevProps, prevState) {
+    if (prevProps !== this.props) {
+      const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
+      dbRef.on('value', (response) => {
+        this.setState({
+          showSubmissionForm: false
+        })
+      })
+    }
+
     if (
       prevProps !== this.props &&
       this.props.difficulty > 0 &&
@@ -39,6 +59,11 @@ class WinLogic extends Component {
       prevProps === this.props
       ) {
         this.victorySwal();
+        if (this.state.threshold === null || this.props.attempts <= this.state.threshold) {
+          this.setState({
+            showSubmissionForm: true
+          })
+        }
       };
 
     if (prevProps !== this.props) {
@@ -59,6 +84,15 @@ class WinLogic extends Component {
     }
   }
 
+  // hideSubmissionForm = () => {
+  //   const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
+  //   dbRef.on('value', (response) => {
+  //     this.setState({
+  //       showSubmissionForm: false
+  //     })
+  //   })
+  // }
+
   calculateThreshold = () => {
     const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
     dbRef.on('value', (response) => {
@@ -72,20 +106,13 @@ class WinLogic extends Component {
         threshold
       });
     });
-    this.setState({
-      data: this.props.data,
-      matches: this.props.matches,
-      difficulty: this.props.difficulty,
-      attempts: this.props.attempts,
-      region: this.props.region,
-    });
   }
 
   victorySwal = () => {
     if (this.state.victory === true) {
       this.setState({
         victory: false,
-        showSubmissionForm: true
+        // showSubmissionForm: true
       });
       Swal.fire({
         title: "Congratulations!",
@@ -107,9 +134,11 @@ class WinLogic extends Component {
               attempts={this.state.attempts}
               region={this.state.region}
               difficulty={this.state.difficulty}
-              showSubmissionForm={this.state.showSubmissionForm} />
+              showSubmissionForm={this.state.showSubmissionForm}
+               />
            : null
         }
+        {/* {this.hideSubmissionForm} */}
       </React.Fragment>
     )
   }
