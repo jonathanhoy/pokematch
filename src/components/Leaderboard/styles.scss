@@ -30,9 +30,16 @@
     &__heading, &__subheading, &__list {
       padding: 0 15px;
     }
+    &__heading-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-right: 15px;
+    }
   }
   .leaderboard.opened {
     left: 30%;
+    // left: 0;
     border-left: 2px solid black;
     margin-bottom: 0;
     .mobile-button--exit {
@@ -41,10 +48,6 @@
       background: darken(lightgrey, 20);
       border: none;
       border-radius: 6px;
-      position: absolute;
-      right: 5px;
-      top: 16px;
-      transition: right 0.5s;
     }
   }
 }

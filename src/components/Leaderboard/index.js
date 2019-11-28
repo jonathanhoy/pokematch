@@ -70,7 +70,14 @@ class Leaderboard extends Component {
   render() {
     return (
       <section className={`leaderboard ${this.state.showMobileLeaderboard ? 'opened' : ''}`}>
-        <h3 className="leaderboard__heading">Leaderboard</h3>
+        <div className="leaderboard__heading-container">
+          <h3 className="leaderboard__heading">Leaderboard</h3>
+          <button
+            className="leaderboard__exit mobile-button--exit"
+            onClick={this.props.toggleLeaderboard}>
+              Exit
+          </button>
+        </div>
         <p className="leaderboard__subheading">{this.capitalize(this.props.region)} - {this.capitalize(this.difficulty())}</p>
         <ol className="leaderboard__list">
           {
@@ -90,9 +97,6 @@ class Leaderboard extends Component {
               })
           }
         </ol>
-        <button
-          className="mobile-button--exit" 
-          onClick={this.props.toggleLeaderboard}>Exit</button>
       </section>
     )
   }
