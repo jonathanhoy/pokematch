@@ -5,7 +5,8 @@ class Leaderboard extends Component {
   constructor() {
     super();
     this.state = {
-      leaderboard: []
+      leaderboard: [],
+      showMobileLeaderboard: false
     }
   }
 
@@ -28,6 +29,9 @@ class Leaderboard extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
+      this.setState({
+        showMobileLeaderboard: this.props.showMobileLeaderboard
+      })
       const dbRef = firebase.database().ref(`${this.props.region}/${this.difficulty()}`);
       dbRef.on('value', (response) => {      
         const newState = [];
@@ -65,7 +69,7 @@ class Leaderboard extends Component {
 
   render() {
     return (
-      <section className="leaderboard">
+      <section className={`leaderboard ${this.state.showMobileLeaderboard ? 'opened' : ''}`}>
         <h3 className="leaderboard__heading">Leaderboard</h3>
         <p className="leaderboard__subheading">{this.capitalize(this.props.region)} - {this.capitalize(this.difficulty())}</p>
         <ol className="leaderboard__list">
@@ -86,6 +90,9 @@ class Leaderboard extends Component {
               })
           }
         </ol>
+        <button
+          className="mobile-button--exit" 
+          onClick={this.props.toggleLeaderboard}>Exit</button>
       </section>
     )
   }

@@ -63,3 +63,15 @@
 .game-metrics {
   text-align: center;
 }
+
+@media (max-width: 767px) {
+  .title {
+    margin: 0;
+  }
+  .card {
+    &__item {
+      width: 85px;
+      height: 85px;
+    }
+  }
+}

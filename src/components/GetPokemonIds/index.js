@@ -21,7 +21,8 @@ class GetPokemonIds extends Component {
         sinnoh: [387, 493],
         unova: [494, 649],
         kalos: [650, 721]
-      }
+      },
+      showMobileLeaderboard: false
     }
   }
 
@@ -59,6 +60,13 @@ class GetPokemonIds extends Component {
     });
   }
 
+  toggleLeaderboard = (e) => {
+    e.preventDefault();
+    this.setState({
+      showMobileLeaderboard: !this.state.showMobileLeaderboard
+    })
+  }
+
   render() {
     const region = this.state.region;
     const [start, end] = this.state.regions[region];
@@ -70,7 +78,7 @@ class GetPokemonIds extends Component {
             className="fetch-form"
             >
 
-            <div className="fetch-form__region-container">
+            <div className="fetch-form__container fetch-form__container--region">
               <label
                 htmlFor="region"
                 className="fetch-form__label"
@@ -94,7 +102,7 @@ class GetPokemonIds extends Component {
               </select>
             </div>
 
-            <div className="fetch-form__difficulty-container">
+            <div className="fetch-form__container fetch-form__container--difficulty">
               <label 
                 htmlFor="difficulty"
                 className="fetch-form__label"
@@ -119,12 +127,19 @@ class GetPokemonIds extends Component {
               className="fetch-form__submit"
               onClick={this.handleSubmit(start, end)}
             >
-              Play!
+                Play!
+            </button>
+            <button
+              className={`mobile-button ${this.state.showMobileLeaderboard ? 'opened' : ''}`}
+              onClick={this.toggleLeaderboard}>
+                Leaderboard
             </button>
           </form>
           <Leaderboard
             region={this.state.region}
-            difficulty={this.state.difficulty} />
+            difficulty={this.state.difficulty}
+            showMobileLeaderboard={this.state.showMobileLeaderboard}
+            toggleLeaderboard={this.toggleLeaderboard} />
         </section>
         <FetchPokemon
           ids={this.state.ids}

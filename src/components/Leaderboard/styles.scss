@@ -11,3 +11,40 @@
     justify-content: space-between;
   }
 }
+
+.mobile-button--exit {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .leaderboard {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 100%;
+    padding: 0;
+    transition: left 0.5s;
+    border-radius: 0;
+    z-index: 100;
+    &__heading, &__subheading, &__list {
+      padding: 0 15px;
+    }
+  }
+  .leaderboard.opened {
+    left: 30%;
+    border-left: 2px solid black;
+    margin-bottom: 0;
+    .mobile-button--exit {
+      display: block;
+      padding: 5px 15px;
+      background: darken(lightgrey, 20);
+      border: none;
+      border-radius: 6px;
+      position: absolute;
+      right: 5px;
+      top: 16px;
+      transition: right 0.5s;
+    }
+  }
+}
