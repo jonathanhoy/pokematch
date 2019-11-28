@@ -22,6 +22,7 @@
     padding: 0;
     transition: left 0.5s;
     border-radius: 0;
+    z-index: 100;
     &__heading, &__subheading, &__list {
       padding: 0 15px;
     }
