@@ -12,6 +12,10 @@
   }
 }
 
+.mobile-button--exit {
+  display: none;
+}
+
 @media (max-width: 767px) {
   .leaderboard {
     position: absolute;
