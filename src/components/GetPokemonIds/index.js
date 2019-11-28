@@ -130,7 +130,7 @@ class GetPokemonIds extends Component {
                 Play!
             </button>
             <button
-              className={`mobile-button ${this.state.showMobileLeaderboard ? 'opened' : ''}`}
+              className={`fetch-form__mobile-button mobile-button ${this.state.showMobileLeaderboard ? 'opened' : ''}`}
               onClick={this.toggleLeaderboard}>
                 Leaderboard
             </button>
