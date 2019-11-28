@@ -6,12 +6,6 @@
   margin-bottom: 15px;
   &__label {
     display: block;
-    &::after {
-      content: "";
-      background-image: url('/public/assets/icons/sort-down.svg');
-      height: 25px;
-      width: 25px;
-    }
   }
   &__select {
     appearance: none;
@@ -25,6 +19,10 @@
   }
 }
 
+.mobile-button {
+  display: none;
+}
+
 @media (max-width: 767px) {
   .fetch-form {
     background: none;
@@ -32,6 +30,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin-bottom: 0;
+    position: relative;
     &__container {
       width: calc(50% - 2.5px);
     }
@@ -40,23 +40,30 @@
     }
     &__select {
       margin: 5px 0;
+      font-size: 14px;
     }
     &__submit {
-      width: calc(100% - 39px);
+      width: calc(100% - 109.75px);
       position: relative;
-      &::after {
-        content: 'X';
-        background: darken(lightgrey, 25);
-        width: 34px;
-        height: 34px;
-        position: absolute;
-        right: -42px;
-        top: -3px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 6px;
-      }
+      font-size: 14px;
     }
+  }
+
+  .mobile-button {
+    display: block;
+    background: darken(lightgrey, 20);
+    border: none;
+    width: 104.75px;
+    height: 32px;
+    border-radius: 6px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transition: right 0.5s, width 0.5s;
+  }
+
+  .mobile-button.opened {
+    position: absolute;
+    right: calc(70% + 5px);
   }
 }

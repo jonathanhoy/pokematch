@@ -65,7 +65,7 @@ class Leaderboard extends Component {
 
   render() {
     return (
-      <section className="leaderboard">
+      <section className={`leaderboard ${this.props.showMobileLeaderboard ? 'opened' : ''}`}>
         <h3 className="leaderboard__heading">Leaderboard</h3>
         <p className="leaderboard__subheading">{this.capitalize(this.props.region)} - {this.capitalize(this.difficulty())}</p>
         <ol className="leaderboard__list">

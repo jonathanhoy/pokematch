@@ -11,3 +11,24 @@
     justify-content: space-between;
   }
 }
+
+@media (max-width: 767px) {
+  .leaderboard {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 100%;
+    padding: 0;
+    transition: left 0.5s;
+    border-radius: 0;
+    &__heading, &__subheading, &__list {
+      padding: 0 15px;
+    }
+  }
+  .leaderboard.opened {
+    left: 30%;
+  }
+
+
+}

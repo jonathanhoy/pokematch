@@ -21,7 +21,8 @@ class GetPokemonIds extends Component {
         sinnoh: [387, 493],
         unova: [494, 649],
         kalos: [650, 721]
-      }
+      },
+      showMobileLeaderboard: false
     }
   }
 
@@ -57,6 +58,13 @@ class GetPokemonIds extends Component {
       [e.target.name]: e.target.value,
       hideBoard: true
     });
+  }
+
+  toggleLeaderboard = (e) => {
+    e.preventDefault();
+    this.setState({
+      showMobileLeaderboard: !this.state.showMobileLeaderboard
+    })
   }
 
   render() {
@@ -119,12 +127,18 @@ class GetPokemonIds extends Component {
               className="fetch-form__submit"
               onClick={this.handleSubmit(start, end)}
             >
-              Play!
+                Play!
+            </button>
+            <button
+              className={`mobile-button ${this.state.showMobileLeaderboard ? 'opened' : ''}`}
+              onClick={this.toggleLeaderboard}>
+              {this.state.showMobileLeaderboard ? 'Exit' : 'Leaderboard'}
             </button>
           </form>
           <Leaderboard
             region={this.state.region}
-            difficulty={this.state.difficulty} />
+            difficulty={this.state.difficulty}
+            showMobileLeaderboard={this.state.showMobileLeaderboard} />
         </section>
         <FetchPokemon
           ids={this.state.ids}
