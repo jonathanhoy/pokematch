@@ -43,7 +43,7 @@
       font-size: 14px;
     }
     &__submit {
-      width: calc(100% - 109.75px);
+      width: calc(50% - 2.5px);
       position: relative;
       font-size: 14px;
     }
@@ -51,18 +51,10 @@
 
   .mobile-button {
     display: block;
+    width: calc(50% - 2.5px);
     background: darken(lightgrey, 20);
     border: none;
-    height: 32px;
     border-radius: 6px;
-    position: absolute;
-    right: 0;
-    bottom: 0;
     transition: right 0.5s, width 0.5s;
-  }
-
-  .mobile-button.opened {
-    position: absolute;
-    right: calc(70% + 5px);
   }
 }

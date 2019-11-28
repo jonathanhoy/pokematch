@@ -132,13 +132,14 @@ class GetPokemonIds extends Component {
             <button
               className={`mobile-button ${this.state.showMobileLeaderboard ? 'opened' : ''}`}
               onClick={this.toggleLeaderboard}>
-              {this.state.showMobileLeaderboard ? 'Exit' : 'Leaderboard'}
+                Leaderboard
             </button>
           </form>
           <Leaderboard
             region={this.state.region}
             difficulty={this.state.difficulty}
-            showMobileLeaderboard={this.state.showMobileLeaderboard} />
+            showMobileLeaderboard={this.state.showMobileLeaderboard}
+            toggleLeaderboard={this.toggleLeaderboard} />
         </section>
         <FetchPokemon
           ids={this.state.ids}
