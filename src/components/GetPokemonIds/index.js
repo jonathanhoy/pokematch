@@ -70,7 +70,7 @@ class GetPokemonIds extends Component {
             className="fetch-form"
             >
 
-            <div className="fetch-form__region-container">
+            <div className="fetch-form__container fetch-form__container--region">
               <label
                 htmlFor="region"
                 className="fetch-form__label"
@@ -94,7 +94,7 @@ class GetPokemonIds extends Component {
               </select>
             </div>
 
-            <div className="fetch-form__difficulty-container">
+            <div className="fetch-form__container fetch-form__container--difficulty">
               <label 
                 htmlFor="difficulty"
                 className="fetch-form__label"

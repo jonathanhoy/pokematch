@@ -24,3 +24,39 @@
     @include formfield;
   }
 }
+
+@media (max-width: 767px) {
+  .fetch-form {
+    background: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    &__container {
+      width: calc(50% - 2.5px);
+    }
+    &__label {
+      font-size: 12px;
+    }
+    &__select {
+      margin: 5px 0;
+    }
+    &__submit {
+      width: calc(100% - 39px);
+      position: relative;
+      &::after {
+        content: 'X';
+        background: darken(lightgrey, 25);
+        width: 34px;
+        height: 34px;
+        position: absolute;
+        right: -42px;
+        top: -3px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6px;
+      }
+    }
+  }
+}
