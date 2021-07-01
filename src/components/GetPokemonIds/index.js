@@ -79,47 +79,40 @@ class GetPokemonIds extends Component {
             >
 
             <div className="fetch-form__container fetch-form__container--region">
-              <label
-                htmlFor="region"
-                className="fetch-form__label"
-              >
-                Select region:
-              </label>
-              <select
-                name="region"
-                id="region"
-                required
-                onChange={this.handleChange}
-                className="fetch-form__select"
-              >
-                <option value="kanto">Kanto</option>
-                <option value="johto">Johto</option>
-                <option value="hoenn">Hoenn</option>
-                <option value="sinnoh">Sinnoh</option>
-                <option value="unova">Unova</option>
-                <option value="kalos">Kalos</option>
-                <option value="all">All</option>
-              </select>
+              <p className="fetch-form__label">Select region:</p>
+
+              <fieldset className="fetch-form__region">
+                <input defaultChecked type="radio" id="kanto" name="region" value="kanto" onClick={this.handleChange} />
+                <label for="kanto">Kanto</label>
+                <input type="radio" id="johto" name="region" value="johto" onClick={this.handleChange} />
+                <label for="johto">Johto</label>
+                <input type="radio" id="hoenn" name="region" value="hoenn" onClick={this.handleChange} />
+                <label for="hoenn">Hoenn</label>
+                <input type="radio" id="sinnoh" name="region" value="sinnoh" onClick={this.handleChange} />
+                <label for="sinnoh">Sinnoh</label>
+                <input type="radio" id="unova" name="region" value="unova" onClick={this.handleChange} />
+                <label for="unova">Unova</label>
+                <input type="radio" id="kalos" name="region" value="kalos" onClick={this.handleChange} />
+                <label for="kalos">Kalos</label>
+                <input type="radio" id="all" name="region" value="all" onClick={this.handleChange} />
+                <label for="all">All Regions</label>
+              </fieldset>
+
+             
             </div>
 
             <div className="fetch-form__container fetch-form__container--difficulty">
-              <label 
-                htmlFor="difficulty"
-                className="fetch-form__label"
-              >
-                Select difficulty:
-              </label>
-              <select
-                name="difficulty"
-                id="difficulty"
-                required
-                onChange={this.handleChange}
-                className="fetch-form__select"
-              >
-                <option value="6">Easy</option>
-                <option value="8">Medium</option>
-                <option value="10">Hard</option>
-              </select>
+              <p className="fetch-form__label">Select difficulty:</p>
+
+              <fieldset className="fetch-form__difficulty">
+                <input defaultChecked type="radio" id="easy" name="difficulty" value="6" onClick={this.handleChange} />
+                <label for="easy">Easy</label>
+                <input type="radio" id="medium" name="difficulty" value="8" onClick={this.handleChange} />
+                <label for="medium">Medium</label>
+                <input type="radio" id="hard" name="difficulty" value="10" onClick={this.handleChange} />
+                <label for="hard">Hard</label>
+              </fieldset>
+
             </div>
 
             <button

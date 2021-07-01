@@ -4,18 +4,32 @@
   padding: 15px;
   margin: 0;
   margin-bottom: 15px;
-  &__label {
-    display: block;
+  input[type="radio"] {
+    display: none;
   }
-  &__select {
-    appearance: none;
+  input[type="radio"]:checked + label {
+    background: #ee1515;
+    color: white;
+    border-radius: 6px;
+  }
+  &__label {
+    margin: 0;
+    font-style: italic;
+  }
+  &__region, &__difficulty {
+    border: none;
     margin: 15px 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    label {
+      padding: 5px;
+    }
   }
   &__submit {
     @include button;
-  }
-  &__select {
-    @include formfield;
   }
 }
 
@@ -36,19 +50,19 @@
     &__label {
       font-size: 12px;
     }
-    &__select {
-      margin: 0;
-      font-size: 14px;
-    }
     &__submit {
       font-size: 14px;
     }
+
     &__mobile-button {
       width: 100%;
       display: block;
       background: darken(lightgrey, 20);
       border: none;
       border-radius: 6px;
+    }
+    &__region, &__difficulty {
+      margin: 5px 0 0;
     }
   }
 }
