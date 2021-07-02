@@ -21,6 +21,7 @@ class WinLogic extends Component {
 
   componentDidMount() {
     // This will hide the submission form when a new high score entry is posted to firebase
+    // eslint-disable-next-line
     const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
     dbRef.on('value', (response) => {
       this.setState({
@@ -31,6 +32,7 @@ class WinLogic extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
+      // eslint-disable-next-line
       const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
       dbRef.on('value', (response) => {
         this.setState({
@@ -83,6 +85,7 @@ class WinLogic extends Component {
   }
 
   calculateThreshold = () => {
+    // eslint-disable-next-line
     const dbRef = firebase.database().ref(`${this.props.region}/${this.props.difficulty == 6 && 'easy' || this.props.difficulty == 8 && 'medium' || this.props.difficulty == 10 && 'hard'}`);
     dbRef.on('value', (response) => {
       const newState = [];
