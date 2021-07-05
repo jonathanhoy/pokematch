@@ -12,6 +12,9 @@
     color: white;
     border-radius: 6px;
   }
+  &__heading {
+    margin-top: 0;
+  }
   &__label {
     margin: 0;
     font-style: italic;
@@ -28,9 +31,21 @@
       padding: 5px;
     }
   }
+  &__difficulty {
+    padding-bottom: 15px;
+  }
   &__submit {
     @include button;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0 0 6px 6px;
   }
+}
+
+.fetch-form {
+  position: relative;
 }
 
 .mobile-button {
@@ -52,8 +67,12 @@
     }
     &__submit {
       font-size: 14px;
+      position: static;
+      border-radius: 6px;
     }
-
+    &__heading {
+      display: none;
+    }
     &__mobile-button {
       width: 100%;
       display: block;

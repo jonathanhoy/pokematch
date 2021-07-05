@@ -77,6 +77,7 @@ class GetPokemonIds extends Component {
             action=""
             className="fetch-form"
             >
+            <h3 className="fetch-form__heading">Settings</h3>
 
             <div className="fetch-form__container fetch-form__container--region">
               <p className="fetch-form__label">Region</p>
@@ -95,7 +96,7 @@ class GetPokemonIds extends Component {
                 <input type="radio" id="kalos" name="region" value="kalos" onClick={this.handleChange} />
                 <label for="kalos">Kalos</label>
                 <input type="radio" id="all" name="region" value="all" onClick={this.handleChange} />
-                <label for="all">All Regions</label>
+                <label for="all">All</label>
               </fieldset>
 
              

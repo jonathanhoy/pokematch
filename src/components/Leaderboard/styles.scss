@@ -9,6 +9,9 @@
   &__item {
     display: flex;
     justify-content: space-between;
+    p {
+      margin: 10px 0;
+    }
   }
 }
 
@@ -29,6 +32,9 @@
     z-index: 100;
     &__heading, &__subheading, &__list {
       padding: 0 15px;
+    }
+    &__heading {
+      margin: 15px 0;
     }
     &__heading-container {
       display: flex;
