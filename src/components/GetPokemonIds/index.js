@@ -79,7 +79,7 @@ class GetPokemonIds extends Component {
             >
 
             <div className="fetch-form__container fetch-form__container--region">
-              <p className="fetch-form__label">Select region:</p>
+              <p className="fetch-form__label">Region</p>
 
               <fieldset className="fetch-form__region">
                 <input defaultChecked type="radio" id="kanto" name="region" value="kanto" onClick={this.handleChange} />
@@ -102,7 +102,7 @@ class GetPokemonIds extends Component {
             </div>
 
             <div className="fetch-form__container fetch-form__container--difficulty">
-              <p className="fetch-form__label">Select difficulty:</p>
+              <p className="fetch-form__label">Difficulty</p>
 
               <fieldset className="fetch-form__difficulty">
                 <input defaultChecked type="radio" id="easy" name="difficulty" value="6" onClick={this.handleChange} />
