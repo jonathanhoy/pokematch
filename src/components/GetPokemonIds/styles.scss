@@ -7,11 +7,6 @@
   input[type="radio"] {
     display: none;
   }
-  input[type="radio"] + label {
-    background: #e8e8e8;
-    border-radius: 6px;
-    padding: 4px 12px;
-  }
   input[type="radio"]:checked + label {
     background: #333;
     color: white;
@@ -27,12 +22,14 @@
     border: none;
     margin: 15px 0;
     padding: 0;
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 5px;
     label {
       padding: 5px;
+      background: #e8e8e8;
+      border-radius: 6px;
+      text-align: center;
     }
   }
   &__submit {
