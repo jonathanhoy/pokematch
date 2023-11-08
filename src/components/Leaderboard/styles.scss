@@ -22,7 +22,6 @@
 @media (max-width: 767px) {
   .leaderboard {
     position: absolute;
-    top: 0;
     bottom: 0;
     right: 0;
     left: 100%;
@@ -30,6 +29,9 @@
     transition: left 0.5s;
     border-radius: 0;
     z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     &__heading, &__subheading, &__list {
       padding: 0 15px;
     }
@@ -45,8 +47,10 @@
   }
   .leaderboard.opened {
     left: 30%;
+    border-top: 2px solid black;
     border-left: 2px solid black;
     margin-bottom: 0;
+    border-radius: 6px 0 0 0;
     .mobile-button--exit {
       display: block;
       padding: 5px 15px;
