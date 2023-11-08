@@ -14,7 +14,7 @@
   input[type="radio"]:checked + label {
     background: #ee1515;
     color: white;
-    border-radius: 6px;
+    padding: 4px 12px;
   }
   &__heading {
     margin-top: 0;
