@@ -87,8 +87,8 @@ class Leaderboard extends Component {
                 if (entry.score !== 0 && index < 5) {
                   return (
                     <li key={index} className="leaderboard__item">
-                      <p>{`${index + 1}. ${entry.name}`}</p>
-                      <p>{`${entry.score}`}</p>
+                      <p className="leaderboard__name">{`${index + 1}. ${entry.name}`}</p>
+                      <p className="leaderboard__score">{`${entry.score}`}</p>
                     </li>
                   )
                 } else {
