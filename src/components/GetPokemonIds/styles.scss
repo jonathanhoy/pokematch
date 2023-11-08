@@ -7,6 +7,10 @@
   input[type="radio"] {
     display: none;
   }
+  input[type="radio"] + label {
+    background: #e8e8e8;
+    border-radius: 6px;
+  }
   input[type="radio"]:checked + label {
     background: #ee1515;
     color: white;
@@ -24,9 +28,9 @@
     margin: 15px 0;
     padding: 0;
     display: flex;
-    justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
+    gap: 0.5px;
     label {
       padding: 5px;
     }
