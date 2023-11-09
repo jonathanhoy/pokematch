@@ -37,9 +37,6 @@
   }
   &__submit {
     @include button;
-    &:hover {
-      background: #c20e0e;
-    }
   }
 }
 
