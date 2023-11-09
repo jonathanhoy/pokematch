@@ -74,7 +74,14 @@
       border-radius: 6px;
     }
     &__region, &__difficulty {
+      grid-template-columns: repeat(4, 1fr);
       margin: 5px 0 0;
+    }
+    &__region {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    &__difficulty {
+      grid-template-columns: repeat(3, 1fr);
     }
     &__container--region {
       grid-column: 1 / 3;
