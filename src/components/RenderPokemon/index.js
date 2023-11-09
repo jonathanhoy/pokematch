@@ -120,47 +120,49 @@ class RenderPokemon extends Component {
     return (
       <section className="gameboard">
         <h1 className="title">Gotta Match 'Em All!</h1>
-        <div className="card__container">
-          <ul className={`card__list ${this.conditionalHide()}`}>
-            {this.props.dataToRender.length === (this.props.difficulty * 2) && // 
-              Object.entries(this.props.dataToRender).map((pokemon, index) => {
-                const { name, sprite } = pokemon[1];
-                return (
-                  <li key={index} className="card__item">
-                    <div className="card__container">
-                      <div
-                        className={this.flipClassNames('front', index)}
-                        onClick={this.flipCard}
-                        id={name}
-                        data-index={index}
-                      >
+        <div>
+          <div className="card__container">
+            <ul className={`card__list ${this.conditionalHide()}`}>
+              {this.props.dataToRender.length === (this.props.difficulty * 2) && // 
+                Object.entries(this.props.dataToRender).map((pokemon, index) => {
+                  const { name, sprite } = pokemon[1];
+                  return (
+                    <li key={index} className="card__item">
+                      <div className="card__container">
+                        <div
+                          className={this.flipClassNames('front', index)}
+                          onClick={this.flipCard}
+                          id={name}
+                          data-index={index}
+                        >
+                        </div>
+                        <div
+                          className={this.flipClassNames('back', index)}
+                        >
+                          <img src={sprite} alt={`A sprite of ${name}.`} className="card__sprite-image" />
+                        </div>
                       </div>
-                      <div
-                        className={this.flipClassNames('back', index)}
-                      >
-                        <img src={sprite} alt={`A sprite of ${name}.`} className="card__sprite-image" />
-                      </div>
-                    </div>
-                  </li>
-                )
-            })}
-          </ul>
+                    </li>
+                  )
+              })}
+            </ul>
+          </div>
+          {this.state.data.length > 0 &&
+            (
+              <div className={`game-metrics ${this.conditionalHide()}`}>
+                <p>Attempts: {this.state.attempts}</p>
+              </div>
+            )
+          }
+          <WinLogic
+            data={this.state.data}
+            matches={this.state.matches}
+            difficulty={this.props.difficulty}
+            attempts={this.state.attempts}
+            region={this.props.region}
+            newGame={this.state.newGame}
+             />
         </div>
-        {this.state.data.length > 0 &&
-          (
-            <div className={`game-metrics ${this.conditionalHide()}`}>
-              <p>Attempts: {this.state.attempts}</p>
-            </div>
-          )
-        }
-        <WinLogic
-          data={this.state.data}
-          matches={this.state.matches}
-          difficulty={this.props.difficulty}
-          attempts={this.state.attempts}
-          region={this.props.region}
-          newGame={this.state.newGame}
-           />
       </section>
     )
   }
