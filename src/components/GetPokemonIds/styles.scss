@@ -30,10 +30,16 @@
       background: #e8e8e8;
       border-radius: 6px;
       text-align: center;
+      &:hover {
+        background: #c8c8c8;
+      }
     }
   }
   &__submit {
     @include button;
+    &:hover {
+      background: #c20e0e;
+    }
   }
 }
 
