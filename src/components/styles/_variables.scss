@@ -8,6 +8,10 @@ $red: #ee1515;
   font-size: 16px;
   padding: 5px 10px;
   width: 100%;
+  &:hover {
+    background: #c20e0e;
+    border-color: #c20e0e;
+  }
 }
 
 @mixin formfield {
