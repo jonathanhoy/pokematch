@@ -20,7 +20,10 @@ class GetPokemonIds extends Component {
         hoenn: [252, 386],
         sinnoh: [387, 493],
         unova: [494, 649],
-        kalos: [650, 721]
+        kalos: [650, 721],
+        alola: [722, 809],
+        galar: [810, 905],
+        paldea: [906, 1010],
       },
       showMobileLeaderboard: false
     }
@@ -95,6 +98,12 @@ class GetPokemonIds extends Component {
                 <label for="unova">Unova</label>
                 <input type="radio" id="kalos" name="region" value="kalos" onClick={this.handleChange} />
                 <label for="kalos">Kalos</label>
+                <input type="radio" id="alola" name="region" value="alola" onClick={this.handleChange} />
+                <label for="alola">Alola</label>
+                <input type="radio" id="galar" name="region" value="galar" onClick={this.handleChange} />
+                <label for="galar">Galar</label>
+                <input type="radio" id="paldea" name="region" value="paldea" onClick={this.handleChange} />
+                <label for="paldea">Paldea</label>
                 <input type="radio" id="all" name="region" value="all" onClick={this.handleChange} />
                 <label for="all">All</label>
               </fieldset>
