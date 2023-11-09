@@ -54,7 +54,8 @@
     font-size: 14px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 12px;
+    grid-row-gap: 12px;
+    grid-column-gap: 5px;
     &__label {
       font-size: 12px;
     }
