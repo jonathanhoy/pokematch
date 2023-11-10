@@ -15,6 +15,12 @@
   }
   &__score {
     font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.5rem;
+    background: $red;
+    color: white;
   }
 }
 
