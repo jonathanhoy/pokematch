@@ -14,7 +14,7 @@ class GetPokemonIds extends Component {
       region: 'kanto',
       hideBoard: true,
       regions: {
-        all: [1, 721],
+        all: [1, 1010],
         kanto: [1, 151],
         johto: [152, 251],
         hoenn: [252, 386],
