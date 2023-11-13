@@ -43,7 +43,7 @@ class GetPokemonIds extends Component {
   }
 
   // Get IDs when form is submittted
-  handleSubmit = (start = 1, end = 721) => (e) => {
+  handleSubmit = (start = 1, end = 1010) => (e) => {
     e.preventDefault();
     const array = [];
     for (let i = start; i <= end; i++) {
