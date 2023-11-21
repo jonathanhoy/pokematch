@@ -9,6 +9,7 @@
   &__item {
     display: flex;
     justify-content: space-between;
+    gap: 0.5rem;
     p {
       margin: 10px 0;
     }
@@ -23,6 +24,7 @@
     background: $red;
     color: white;
     border-radius: 50%;
+    min-width: 1.5rem;
   }
 }
 
