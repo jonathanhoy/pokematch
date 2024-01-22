@@ -5,13 +5,14 @@
   }
   &__list {
     padding: 0;
+    margin-bottom: 0;
   }
   &__item {
     display: flex;
     justify-content: space-between;
     gap: 0.5rem;
     p {
-      margin: 10px 0;
+      margin: 6px 0;
     }
   }
   &__score {
