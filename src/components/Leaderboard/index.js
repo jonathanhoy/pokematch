@@ -78,7 +78,7 @@ class Leaderboard extends Component {
               Exit
           </button>
         </div>
-        <p className="leaderboard__subheading">{this.capitalize(this.props.region)} - {this.capitalize(this.difficulty())}</p>
+        <p className="leaderboard__subheading"><span>{this.capitalize(this.props.region)}</span> <span>{this.capitalize(this.difficulty())}</span></p>
         <ol className="leaderboard__list">
           {
             Object.values(this.state.leaderboard)
