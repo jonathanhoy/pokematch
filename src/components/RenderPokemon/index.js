@@ -120,6 +120,11 @@ class RenderPokemon extends Component {
     return (
       <section className="gameboard">
         <h1 className="title">Gotta Match 'Em All!</h1>
+        {this.props.hideBoard === true &&
+          <div className='splash'>
+            <p>Pick a region and a difficulty to get started.</p>
+          </div>
+        }
         <div>
           <div className="card__container">
             <ul className={`card__list ${this.conditionalHide()}`}>

@@ -80,3 +80,17 @@
 		}
 	}
 }
+
+.splash {
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75dvh;
+  p {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+}

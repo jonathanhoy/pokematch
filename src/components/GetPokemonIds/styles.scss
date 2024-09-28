@@ -16,7 +16,8 @@
   }
   &__label {
     margin: 0;
-    font-style: italic;
+    // color: red;
+    font-weight: 600;
   }
   &__region, &__difficulty {
     border: none;

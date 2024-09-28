@@ -1,7 +1,15 @@
 .leaderboard {
   overflow: scroll;
   &__subheading {
-    font-style: italic;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #575757;
+    span {
+      background: #e3e3e3;
+      padding: 4px 6px;
+      border-radius: 3px;
+    }
   }
   &__list {
     padding: 0;
